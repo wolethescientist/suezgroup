@@ -1,0 +1,348 @@
+/* Same group type system. Zodiak display, Switzer body — one voice across three sites. */
+@import url("https://api.fontshare.com/v2/css?f[]=zodiak@400,500,700,800&f[]=switzer@400,500,600,700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* ---- Third canvas in the family. Electric is warm ink, Gas is warm bone,
+       Group is COOL GRAPHITE — same family, distinguished by hue not just value. ---- */
+  --color-slate: #0b1015;
+  --color-slate-2: #121922;
+  --color-slate-3: #1a232e;
+  --color-slate-line: #27323f;
+
+  --color-paper: #f0ede7;
+  --color-paper-2: #e4e0d8;
+  --color-paper-line: #cbc5b8;
+
+  /* The group accent is the exact midpoint of its two subsidiaries' brand oranges:
+     SuezElectric #F18835 and Suez Gas #F58220. */
+  --color-ember: #f3852a; /* on slate — 7.4:1. Never on paper. */
+  --color-ember-ink: #8b4a0d; /* the paper-safe shade — 6.0:1 on paper */
+
+  --color-fg-slate: #eef1f4;
+  --color-fg-slate-muted: #97a1ac; /* 6.7:1 on slate */
+  --color-fg-paper: #14171b;
+  --color-fg-paper-muted: #545860; /* 6.0:1 on paper */
+
+  --font-display: "Zodiak", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Switzer", ui-sans-serif, system-ui, sans-serif;
+  --font-label: "Switzer", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* Group type runs LARGER and looser than the siblings — holding-company restraint:
+     fewer elements, more air, bigger statements. */
+  --text-display-xl: clamp(3.25rem, 9.4vw, 9.5rem);
+  --text-display-l: clamp(2.5rem, 5.8vw, 5.25rem);
+  --text-display-m: clamp(1.875rem, 3.4vw, 3.125rem);
+  --text-display-s: clamp(1.375rem, 2.1vw, 1.8125rem);
+  --text-body-l: 1.25rem;
+  --text-body: 1.0625rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-slate-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-slate);
+    color: var(--color-fg-slate);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.7;
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-ember);
+    color: var(--color-slate);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ember);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .measure {
+    width: 100%;
+    max-width: 84rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 5rem);
+  }
+
+  /* The group's structural signature: a numbered index rail down the left of every
+     section, the way an annual report numbers its parts. Neither sibling has this. */
+  .rail {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 64rem) {
+    .rail {
+      grid-template-columns: 7rem 1fr;
+      gap: 0;
+    }
+  }
+  .rail-index {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-ember);
+  }
+  .rail-index::before {
+    content: "";
+    margin-top: 0.55em;
+    width: 1.5rem;
+    height: 1px;
+    flex: none;
+    background: currentColor;
+    opacity: 0.7;
+  }
+  .on-paper .rail-index {
+    color: var(--color-ember-ink);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-ember);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.7;
+  }
+  .on-paper .eyebrow {
+    color: var(--color-ember-ink);
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0 1.75rem;
+    border-radius: 9999px;
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      background-color 200ms var(--ease-out-expo),
+      color 200ms var(--ease-out-expo),
+      border-color 200ms var(--ease-out-expo),
+      box-shadow 260ms var(--ease-out-expo);
+  }
+  .btn-ember {
+    background: var(--color-ember);
+    color: var(--color-slate);
+    border: 1px solid var(--color-ember);
+  }
+  .btn-ember:hover {
+    background: #f79c50;
+    border-color: #f79c50;
+    box-shadow: 0 14px 40px -18px rgb(243 133 42 / 0.7);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-fg-slate);
+    border: 1px solid var(--color-slate-line);
+  }
+  .btn-ghost:hover {
+    background: var(--color-slate-2);
+    border-color: var(--color-fg-slate-muted);
+  }
+  .on-paper .btn-ghost {
+    color: var(--color-fg-paper);
+    border-color: var(--color-paper-line);
+  }
+  .on-paper .btn-ghost:hover {
+    background: var(--color-paper-2);
+    border-color: var(--color-fg-paper-muted);
+  }
+
+  /* ---------- Paper (light) sections ---------- */
+  .on-paper {
+    background: var(--color-paper);
+    color: var(--color-fg-paper);
+  }
+  .on-paper * {
+    border-color: var(--color-paper-line);
+  }
+
+  .link-slide {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+  .link-slide::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 340ms var(--ease-out-expo);
+  }
+  .link-slide:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ---------- Forms ---------- */
+  .field > label {
+    display: block;
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-fg-slate-muted);
+  }
+  .field > input,
+  .field > select,
+  .field > textarea {
+    width: 100%;
+    min-height: 3.25rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    background: transparent;
+    color: var(--color-fg-slate);
+    border: 0;
+    border-bottom: 1px solid var(--color-slate-line);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    transition:
+      border-color 220ms var(--ease-out-expo),
+      box-shadow 220ms var(--ease-out-expo);
+  }
+  .field > textarea {
+    min-height: 7rem;
+    resize: vertical;
+  }
+  .field > input::placeholder,
+  .field > textarea::placeholder {
+    color: var(--color-fg-slate-muted);
+    opacity: 0.6;
+  }
+  .field > input:focus,
+  .field > select:focus,
+  .field > textarea:focus {
+    outline: none;
+    border-color: var(--color-ember);
+    box-shadow: 0 1px 0 0 var(--color-ember);
+  }
+  .field > select {
+    appearance: none;
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: overlay;
+  }
+
+  /* The web breathes rather than drifts — a network settling, not terrain moving */
+  .web-drift {
+    animation: web-drift 60s var(--ease-out-expo) infinite alternate;
+  }
+  @keyframes web-drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    }
+    to {
+      transform: translate3d(-1.5%, 1%, 0) scale(1.05) rotate(3deg);
+    }
+  }
+
+  /* Entrance system. The hidden state is applied by a class that is REMOVED to
+     reveal, so no rule has to out-specify another — the previous base/override pair
+     was fragile and silently lost the cascade on one of the sites. */
+  .reveal > * {
+    transition:
+      opacity 460ms var(--ease-entrance),
+      transform 460ms var(--ease-entrance);
+    transition-delay: calc(var(--i, 0) * 45ms);
+  }
+  /* :not(:has(.wipe)) keeps headings out of the fade — a wipe already animates them,
+     and doing both at once is what read as sluggish. */
+  .reveal-hidden > *:not(:has(.wipe)),
+  .reveal-hidden .reveal > *:not(:has(.wipe)) {
+    opacity: 0;
+    transform: translate3d(0, 0.7rem, 0);
+  }
+
+  .wipe {
+    display: block;
+    overflow: hidden;
+  }
+  /* The wipe transform is set inline by WipeLines from React state — CSS only
+     provides the clipping frame here. */
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .web-drift {
+      animation: none;
+    }
+    .reveal > *,
+    .reveal-hidden > *,
+    .wipe > span {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}
