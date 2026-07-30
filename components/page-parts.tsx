@@ -31,7 +31,7 @@ export function RailSection({
     >
       <Reveal className="measure relative">
         <div className="rail">
-          <div className="rail-index lg:sticky lg:top-28 lg:self-start">
+          <div className="rail-index lg:self-start">
             <span>
               {String(index).padStart(2, "0")}
               <span className="mt-1.5 block opacity-70">{label}</span>

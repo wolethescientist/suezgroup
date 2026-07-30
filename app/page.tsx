@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Strata, Web } from "@/components/texture";
 import { Reveal, WipeLines } from "@/components/reveal";
 import { GroupMark } from "@/components/logo";
+import { GroupDiagram } from "@/components/group-diagram";
+import { PathSelector } from "@/components/path-selector";
 import {
   PullQuote,
   RailSection,
@@ -18,6 +20,7 @@ const COMPANIES = [
     rc: "RC 1076785",
     href: "https://suezgas.com",
     cta: "suezgas.com",
+    accent: "#f58220",
   },
   {
     name: "SuezElectric",
@@ -27,6 +30,7 @@ const COMPANIES = [
     rc: "RC 1638998",
     href: "https://suezelectric.com",
     cta: "suezelectric.com",
+    accent: "#f18835",
   },
   {
     name: "Suez Trading International",
@@ -36,6 +40,7 @@ const COMPANIES = [
     rc: null,
     href: null,
     cta: null,
+    accent: "#8d94a0",
   },
 ];
 
@@ -49,35 +54,66 @@ export default function HomePage() {
         {/* `reveal` sits on the same node that receives `is-in`, so the stagger
             resolves via .reveal.is-in > * without relying on a descendant match. */}
         <div className="measure relative">
-          <Reveal className="reveal mx-auto max-w-4xl text-center" immediate>
-            <h1 className="text-display-xl">
-              <WipeLines lines={["Energy,", "two ways."]} />
-            </h1>
+          <div className="grid items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+            <Reveal className="reveal" immediate>
+              <h1 className="text-display-xl">
+                <WipeLines lines={["Energy,", "two ways."]} />
+              </h1>
 
-            <p
-              className="mx-auto mt-10 max-w-xl text-body-l text-fg-slate-muted"
-              style={{ "--i": 3 } as React.CSSProperties}
-            >
-              Suez Group supplies the two things an Abuja household actually runs
-              on — cooking gas and electricity — down a single distribution
-              network we have operated since 2012.
-            </p>
+              <p
+                className="mt-10 max-w-lg text-body-l text-fg-slate-muted"
+                style={{ "--i": 3 } as React.CSSProperties}
+              >
+                Suez Group supplies the two things an Abuja household actually
+                runs on — cooking gas and electricity — down one distribution
+                network we have operated since 2012.
+              </p>
 
+              <div
+                className="mt-11 flex flex-wrap items-center gap-3"
+                style={{ "--i": 4 } as React.CSSProperties}
+              >
+                <Link href="/companies" className="btn btn-ember">
+                  Our companies
+                </Link>
+                <Link href="/about" className="btn btn-ghost">
+                  About the group
+                </Link>
+              </div>
+            </Reveal>
+
+            {/* Focal object: the group's actual structure */}
+            <Reveal className="reveal relative" immediate delay={140}>
+              <div
+                className="relative"
+                style={{ "--i": 0 } as React.CSSProperties}
+              >
+                <span className="ember-bloom left-[8%] top-[2%] h-[62%] w-[84%]" />
+                <GroupDiagram className="relative" />
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* Enterprise-gateway path selection: route each visitor before anything else */}
+        <div className="measure relative mt-20 lg:mt-28">
+          <Reveal className="reveal">
             <div
-              className="mt-11 flex flex-wrap items-center justify-center gap-3"
-              style={{ "--i": 4 } as React.CSSProperties}
+              className="mb-7 flex flex-wrap items-baseline justify-between gap-4"
+              style={{ "--i": 0 } as React.CSSProperties}
             >
-              <Link href="/companies" className="btn btn-ember">
-                Our companies
-              </Link>
-              <Link href="/about" className="btn btn-ghost">
-                About the group
-              </Link>
+              <div className="eyebrow">Start here</div>
+              <span className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-slate-muted">
+                Four doors, one group
+              </span>
+            </div>
+            <div style={{ "--i": 1 } as React.CSSProperties}>
+              <PathSelector />
             </div>
           </Reveal>
         </div>
 
-        <div className="measure relative mt-20 lg:mt-28">
+        <div className="measure relative mt-20 lg:mt-24">
           <StatRow
             items={[
               { label: "Operating companies", value: "Three" },
@@ -100,13 +136,25 @@ export default function HomePage() {
           {COMPANIES.map((c, i) => (
             <div
               key={c.name}
-              className="grid gap-6 border-t border-slate-line py-10 lg:grid-cols-[1fr_1.3fr] lg:gap-16"
+              className="group relative grid gap-6 border-t border-slate-line py-11 transition-colors duration-300 lg:grid-cols-[3.5rem_1fr_1.3fr] lg:gap-14"
               style={{ "--i": i } as React.CSSProperties}
             >
+              {/* A hairline of the company's own colour lights up along the top rule */}
+              <span
+                aria-hidden="true"
+                className="absolute left-0 top-[-1px] h-px w-0 transition-[width] duration-500 ease-out group-hover:w-full"
+                style={{ background: c.accent }}
+              />
+              <div
+                className="font-display text-[2rem] leading-none opacity-30 transition-opacity duration-300 group-hover:opacity-100"
+                style={{ color: c.accent }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </div>
               <div>
                 <h3 className="text-display-s">{c.name}</h3>
                 <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.6875rem] uppercase tracking-[0.09em]">
-                  <span className="text-ember">{c.role}</span>
+                  <span style={{ color: c.accent }}>{c.role}</span>
                   {c.since && (
                     <span className="text-fg-slate-muted">Since {c.since}</span>
                   )}
@@ -120,7 +168,8 @@ export default function HomePage() {
                 {c.href && (
                   <a
                     href={c.href}
-                    className="link-slide mt-5 inline-block text-[0.9375rem] text-fg-slate transition-colors duration-200 hover:text-ember"
+                    className="link-slide mt-5 inline-block text-[0.9375rem] text-fg-slate transition-colors duration-200"
+                    style={{ color: undefined }}
                   >
                     {c.cta} &rarr;
                   </a>
