@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Strata, Web } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
 import { PageHero, RailSection, SectionTitle } from "@/components/page-parts";
+import { CompanyVisual, RouteSignal } from "@/components/energy-visuals";
 
 export const metadata: Metadata = {
   title: "Our companies",
@@ -28,6 +29,7 @@ const COMPANIES = [
     ],
     href: "https://suezgas.com",
     cta: "Visit suezgas.com",
+    visual: "gas" as const,
   },
   {
     index: 2,
@@ -46,6 +48,7 @@ const COMPANIES = [
     ],
     href: "https://suezelectric.com",
     cta: "Visit suezelectric.com",
+    visual: "power" as const,
   },
   {
     index: 3,
@@ -64,6 +67,7 @@ const COMPANIES = [
     ],
     href: null,
     cta: null,
+    visual: "trading" as const,
   },
 ];
 
@@ -75,20 +79,23 @@ export default function CompaniesPage() {
         lines={["Three front doors,", "one group."]}
         lede="Each company is a separate legal entity trading under its own name. If you are buying, go straight to the one you need — the links are below."
         aside={
-          <dl className="space-y-4 border-l border-slate-line pl-6">
-            {[
-              ["Sectors", "LPG · electricity · haulage"],
-              ["Shared base", "20 Alexandria Crescent, Wuse II"],
-              ["Group since", "2012"],
-            ].map(([k, v]) => (
-              <div key={k}>
-                <dt className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-slate-muted">
-                  {k}
-                </dt>
-                <dd className="mt-1.5 text-[0.9375rem]">{v}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="grid gap-10">
+            <dl className="space-y-4 border-l border-slate-line pl-6">
+              {[
+                ["Sectors", "LPG · electricity · haulage"],
+                ["Shared base", "20 Alexandria Crescent, Wuse II"],
+                ["Group since", "2012"],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <dt className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-slate-muted">
+                    {k}
+                  </dt>
+                  <dd className="mt-1.5 text-[0.9375rem]">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <RouteSignal label="Route architecture" value="one group / three doors" />
+          </div>
         }
       />
 
@@ -97,6 +104,7 @@ export default function CompaniesPage() {
           key={c.name}
           index={c.index}
           label={c.label}
+          id={c.index === 3 ? "upstream" : undefined}
           tone={c.index === 2 ? "paper" : "slate"}
         >
           <SectionTitle title={c.name} />
@@ -117,8 +125,11 @@ export default function CompaniesPage() {
             </div>
           )}
 
-          <Reveal className="reveal mt-10 grid gap-14 lg:grid-cols-[1.3fr_0.7fr] lg:gap-20">
+          <Reveal className="reveal mt-10 grid gap-10 lg:grid-cols-[0.72fr_1.45fr_0.8fr] lg:gap-14">
             <div style={{ "--i": 0 } as React.CSSProperties}>
+              <CompanyVisual kind={c.visual} />
+            </div>
+            <div style={{ "--i": 1 } as React.CSSProperties}>
               {c.body.map((p) => (
                 <p
                   key={p}
@@ -141,7 +152,7 @@ export default function CompaniesPage() {
               )}
             </div>
 
-            <dl style={{ "--i": 1 } as React.CSSProperties}>
+            <dl style={{ "--i": 2 } as React.CSSProperties}>
               {c.facts.map(([k, v]) => (
                 <div key={k} className="border-t py-4">
                   <dt

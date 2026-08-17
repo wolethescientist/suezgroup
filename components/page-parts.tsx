@@ -25,7 +25,7 @@ export function RailSection({
   return (
     <section
       id={id}
-      className={`relative overflow-hidden py-20 lg:py-28 ${
+      className={`relative scroll-mt-28 overflow-hidden py-20 lg:py-28 ${
         tone === "paper" ? "on-paper" : "border-t border-slate-line"
       } ${className}`}
     >

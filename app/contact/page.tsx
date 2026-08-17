@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Web } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
+import { RouteSignal } from "@/components/energy-visuals";
+import { ContactForm } from "@/components/contact-form";
 import { PageHero } from "@/components/page-parts";
 
 export const metadata: Metadata = {
@@ -40,6 +42,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         lines={["Go to the right", "door first."]}
         lede="If you are buying gas or electricity, the operating company will resolve it faster than the group will. Everything else — supply, partnership, investment — comes here."
+        aside={<RouteSignal label="Group office" value="partnership / supply / capital" />}
       />
 
       <section className="relative overflow-hidden py-20 lg:py-28">
@@ -84,55 +87,7 @@ export default function ContactPage() {
               <h2 className="text-display-m" style={{ "--i": 0 } as React.CSSProperties}>
                 Group enquiries.
               </h2>
-              <form className="mt-10 space-y-8" style={{ "--i": 1 } as React.CSSProperties}>
-                <div className="grid gap-8 sm:grid-cols-2">
-                  <p className="field">
-                    <label htmlFor="g-name">Full name</label>
-                    <input id="g-name" name="name" type="text" autoComplete="name" required />
-                  </p>
-                  <p className="field">
-                    <label htmlFor="g-org">Organisation</label>
-                    <input id="g-org" name="organisation" type="text" autoComplete="organization" />
-                  </p>
-                </div>
-
-                <div className="grid gap-8 sm:grid-cols-2">
-                  <p className="field">
-                    <label htmlFor="g-email">Email</label>
-                    <input id="g-email" name="email" type="email" autoComplete="email" required />
-                  </p>
-                  <p className="field">
-                    <label htmlFor="g-phone">Phone</label>
-                    <input id="g-phone" name="phone" type="tel" autoComplete="tel" />
-                  </p>
-                </div>
-
-                <p className="field">
-                  <label htmlFor="g-topic">Nature of enquiry</label>
-                  <select id="g-topic" name="topic" defaultValue="partnership">
-                    <option value="partnership">Partnership or integration</option>
-                    <option value="supply">Supply or off-take</option>
-                    <option value="investment">Investment</option>
-                    <option value="press">Press or media</option>
-                    <option value="careers">Careers</option>
-                    <option value="other">Something else</option>
-                  </select>
-                </p>
-
-                <p className="field">
-                  <label htmlFor="g-message">Message</label>
-                  <textarea id="g-message" name="message" required />
-                </p>
-
-                {/* ponytail: presentation only — wire to your mailer or a server action. */}
-                <button type="submit" className="btn btn-ember w-full sm:w-auto">
-                  Send enquiry
-                </button>
-
-                <p className="text-[0.6875rem] uppercase tracking-[0.075em] text-fg-slate-muted">
-                  Customer orders are faster on the numbers to the left.
-                </p>
-              </form>
+              <ContactForm />
             </Reveal>
           </div>
         </Reveal>

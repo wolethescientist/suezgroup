@@ -97,6 +97,11 @@ export function SiteFooter() {
               ))}
             </ul>
 
+            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-[0.72rem] uppercase tracking-[0.08em] text-fg-slate-muted">
+              <Link href="/privacy" className="link-slide hover:text-ember">Privacy</Link>
+              <Link href="/terms" className="link-slide hover:text-ember">Terms</Link>
+            </div>
+
             <h3 className="mt-10 text-[0.6875rem] font-normal uppercase tracking-[0.09em] text-fg-slate-muted">
               Advisers
             </h3>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Strata, Web } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
+import { RouteSignal } from "@/components/energy-visuals";
 import {
   PageHero,
   PullQuote,
@@ -46,6 +47,7 @@ export default function AboutPage() {
         eyebrow="About the group"
         lines={["Built route first,", "products second."]}
         lede="Most energy retail starts with a product and hunts for customers. Suez Group started with a delivery network in Abuja and added the things worth sending down it."
+        aside={<RouteSignal label="Operating thesis" value="route before product" />}
       />
 
       {/* 01 Timeline */}

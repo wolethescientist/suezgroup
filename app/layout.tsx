@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Grain } from "@/components/texture";
+import { MarketTicker } from "@/components/market-ticker";
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -13,6 +14,7 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
     default: "Suez Group — An Abuja energy group",
     template: "%s — Suez Group",
@@ -25,6 +27,13 @@ export const metadata: Metadata = {
       "LPG distribution, prepaid electricity vending, and import and haulage, from Abuja.",
     type: "website",
     locale: "en_NG",
+    images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "Suez Group energy infrastructure" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Suez Group — An Abuja energy group",
+    description: "Cooking gas, electricity, import and haulage from Abuja.",
+    images: ["/og-image.svg"],
   },
 };
 
@@ -48,6 +57,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <MarketTicker />
         <Grain />
         <SiteHeader />
         <main id="main">{children}</main>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Strata, Web } from "@/components/texture";
 import { Reveal, WipeLines } from "@/components/reveal";
 import { GroupMark } from "@/components/logo";
-import { GroupDiagram } from "@/components/group-diagram";
+import { CompanyVisual, EnergyField } from "@/components/energy-visuals";
 import { PathSelector } from "@/components/path-selector";
 import {
   PullQuote,
@@ -89,7 +89,7 @@ export default function HomePage() {
                 style={{ "--i": 0 } as React.CSSProperties}
               >
                 <span className="ember-bloom left-[8%] top-[2%] h-[62%] w-[84%]" />
-                <GroupDiagram className="relative" />
+                <EnergyField />
               </div>
             </Reveal>
           </div>
@@ -122,6 +122,21 @@ export default function HomePage() {
               { label: "Base", value: "Wuse II, Abuja" },
             ]}
           />
+        </div>
+
+        <div className="measure relative mt-20 lg:mt-24">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <div className="eyebrow">How the route works</div>
+              <h2 className="mt-5 max-w-2xl text-display-m">Physical supply. Digital reach.</h2>
+            </div>
+            <p className="max-w-sm text-sm text-fg-slate-muted">The group moves between the cylinder, the token and the tanker — carrying the same operating discipline through each layer.</p>
+          </div>
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr_1fr]">
+            <CompanyVisual kind="gas" />
+            <CompanyVisual kind="power" />
+            <CompanyVisual kind="trading" />
+          </div>
         </div>
       </section>
 

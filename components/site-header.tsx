@@ -32,7 +32,7 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-3 top-3 z-50 sm:inset-x-5 sm:top-5">
+    <header className="fixed inset-x-3 top-12 z-50 sm:inset-x-5 sm:top-14">
       <div
         className={`mx-auto flex w-full max-w-[84rem] items-center justify-between rounded-full border pl-5 pr-2 transition-[background-color,border-color,padding] duration-500 sm:pl-7 sm:pr-2.5 ${
           scrolled
