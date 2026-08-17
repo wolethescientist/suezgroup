@@ -4,13 +4,9 @@ type CompanyVisualKind = "gas" | "power" | "trading";
 
 export function EnergyField({ className = "" }: { className?: string }) {
   return (
-    <div className={`energy-field ${className}`}>
-      <div className="energy-field-grid" aria-hidden="true" />
-      <div className="energy-field-topline">
-        <span>Network pulse</span>
-        <span>Abuja / 14.2°N</span>
-      </div>
-      <svg className="energy-field-lines" viewBox="0 0 620 430" aria-hidden="true">
+    <div className={`energy-constellation ${className}`}>
+      <div className="energy-constellation-kicker">Abuja / route 01</div>
+      <svg className="energy-constellation-lines" viewBox="0 0 620 430" aria-hidden="true">
         <path d="M310 214C250 150 160 120 76 78" />
         <path d="M310 214C405 178 494 124 562 74" />
         <path d="M310 214C245 276 180 320 82 354" />
@@ -20,30 +16,30 @@ export function EnergyField({ className = "" }: { className?: string }) {
         <circle cx="82" cy="354" r="5" />
         <circle cx="548" cy="352" r="5" />
       </svg>
-      <div className="energy-field-core">
-        <span className="energy-field-core-ring" aria-hidden="true" />
-        <GroupMark className="h-14 w-auto text-ember" />
-        <span className="energy-field-core-name">Suez Group</span>
-        <span className="energy-field-core-meta">one route / three operators</span>
+      <div className="energy-constellation-core">
+        <span className="energy-constellation-core-glow" aria-hidden="true" />
+        <span className="energy-constellation-core-ring" aria-hidden="true" />
+        <GroupMark className="h-20 w-auto text-slate" />
+        <span className="energy-constellation-core-name">Suez Group</span>
       </div>
-      <div className="energy-field-readout energy-field-readout-gas">
-        <span className="energy-field-readout-index">01 / LPG</span>
-        <strong>3–50 kg</strong>
-        <span>weighed at the door</span>
+      <div className="energy-constellation-label energy-constellation-label-gas">
+        <span>01 / gas</span>
+        <strong>Cooking gas</strong>
+        <em>cylinder / home / route</em>
       </div>
-      <div className="energy-field-readout energy-field-readout-power">
-        <span className="energy-field-readout-index">02 / POWER</span>
-        <strong>prepaid</strong>
-        <span>web · mobile · kiosks</span>
+      <div className="energy-constellation-label energy-constellation-label-power">
+        <span>02 / power</span>
+        <strong>Prepaid electricity</strong>
+        <em>token / wallet / kiosk</em>
       </div>
-      <div className="energy-field-readout energy-field-readout-trading">
-        <span className="energy-field-readout-index">03 / UPSTREAM</span>
-        <strong>road tanker</strong>
-        <span>contracted volume</span>
+      <div className="energy-constellation-label energy-constellation-label-trading">
+        <span>03 / upstream</span>
+        <strong>Bulk haulage</strong>
+        <em>import / tanker / volume</em>
       </div>
-      <div className="energy-field-footline">
-        <span>Since 2012</span>
-        <span className="energy-field-pulse"><i /> Operating network</span>
+      <div className="energy-constellation-caption">
+        <span>one route / three operators</span>
+        <span>since 2012</span>
       </div>
     </div>
   );

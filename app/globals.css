@@ -258,8 +258,7 @@
     font-weight: 400;
   }
 
-  .market-ticker-dot,
-  .energy-field-pulse i {
+  .market-ticker-dot {
     display: inline-block;
     width: 0.5rem;
     height: 0.5rem;
@@ -443,39 +442,31 @@
       0 30px 60px -40px rgb(0 0 0 / 0.9);
   }
 
-  .energy-field {
+  .energy-constellation {
     position: relative;
     min-height: 32rem;
-    overflow: hidden;
-    border: 1px solid var(--color-slate-line);
-    border-radius: 1.5rem;
-    background:
-      radial-gradient(circle at 50% 48%, rgb(243 133 42 / 0.16), transparent 28%),
-      linear-gradient(135deg, rgb(255 255 255 / 0.035), transparent 56%),
-      var(--color-slate-2);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 30px 70px -46px rgb(0 0 0 / 0.95);
+    overflow: visible;
+    isolation: isolate;
   }
 
-  .energy-field-grid {
+  .energy-constellation::before {
     position: absolute;
-    inset: 0;
-    opacity: 0.45;
-    background-image:
-      linear-gradient(rgb(151 161 172 / 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(151 161 172 / 0.08) 1px, transparent 1px);
-    background-size: 3rem 3rem;
-    mask-image: radial-gradient(circle at 50% 50%, black, transparent 74%);
+    top: 29%;
+    left: 50%;
+    width: 15rem;
+    height: 15rem;
+    content: "";
+    border-radius: 50%;
+    background: rgb(243 133 42 / 0.16);
+    filter: blur(32px);
+    transform: translate(-50%, -50%);
+    z-index: -1;
   }
 
-  .energy-field-topline,
-  .energy-field-footline,
-  .company-visual-header,
-  .company-visual-footer {
+  .energy-constellation-kicker {
     position: absolute;
-    right: 1.25rem;
-    left: 1.25rem;
-    display: flex;
-    justify-content: space-between;
+    top: 0.4rem;
+    right: 0;
     color: var(--color-fg-slate-muted);
     font-family: var(--font-mono);
     font-size: 0.62rem;
@@ -483,127 +474,135 @@
     text-transform: uppercase;
   }
 
-  .energy-field-topline {
-    top: 1.25rem;
-  }
-
-  .energy-field-footline {
-    bottom: 1.25rem;
-    border-top: 1px solid rgb(151 161 172 / 0.24);
-    padding-top: 0.75rem;
-  }
-
-  .energy-field-lines {
+  .energy-constellation-lines {
     position: absolute;
-    inset: 0;
+    inset: 2rem 0 1.2rem;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 3.2rem);
+    overflow: visible;
   }
 
-  .energy-field-lines path {
+  .energy-constellation-lines path {
     fill: none;
-    stroke: var(--color-ember);
-    stroke-dasharray: 5 8;
-    stroke-linecap: round;
-    stroke-opacity: 0.55;
-    stroke-width: 1.2;
-  }
-
-  .energy-field-lines path:nth-child(2),
-  .energy-field-lines path:nth-child(4) {
     stroke: var(--color-fg-slate-muted);
+    stroke-linecap: round;
+    stroke-opacity: 0.42;
+    stroke-width: 1;
   }
 
-  .energy-field-lines circle {
+  .energy-constellation-lines path:nth-child(1),
+  .energy-constellation-lines path:nth-child(3) {
+    stroke: var(--color-ember);
+    stroke-dasharray: 1 9;
+    stroke-opacity: 0.76;
+  }
+
+  .energy-constellation-lines circle {
     fill: var(--color-ember);
-    stroke: var(--color-slate-2);
+    stroke: var(--color-slate);
     stroke-width: 5;
   }
 
-  .energy-field-core {
+  .energy-constellation-core {
     position: absolute;
-    top: 50%;
+    top: 49%;
     left: 50%;
     display: grid;
+    width: 9rem;
+    height: 9rem;
     place-items: center;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    border-radius: 48% 52% 50% 50%;
+    background: var(--color-ember);
+    box-shadow: 0 1.5rem 4rem -1.5rem rgb(243 133 42 / 0.8);
+    transform: translate(-50%, -50%) rotate(-6deg);
   }
 
-  .energy-field-core-ring {
+  .energy-constellation-core-glow {
     position: absolute;
-    width: 8rem;
-    height: 8rem;
-    border: 1px solid rgb(243 133 42 / 0.3);
-    border-radius: 9999px;
-    box-shadow: 0 0 0 1rem rgb(243 133 42 / 0.035), 0 0 60px rgb(243 133 42 / 0.16);
+    width: 11rem;
+    height: 11rem;
+    border: 1px solid rgb(243 133 42 / 0.4);
+    border-radius: 50%;
+    transform: rotate(6deg);
   }
 
-  .energy-field-core-name,
-  .energy-field-core-meta {
+  .energy-constellation-core-ring {
+    position: absolute;
+    width: 13rem;
+    height: 13rem;
+    border: 1px solid rgb(243 133 42 / 0.22);
+    border-radius: 50%;
+    transform: rotate(6deg);
+  }
+
+  .energy-constellation-core svg,
+  .energy-constellation-core-name {
     position: relative;
-    display: block;
+    z-index: 1;
+    transform: rotate(6deg);
+  }
+
+  .energy-constellation-core-name {
+    margin-top: -1.2rem;
+    color: var(--color-slate);
     font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
-  .energy-field-core-name {
-    margin-top: 0.8rem;
-    color: var(--color-fg-slate);
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-  }
-
-  .energy-field-core-meta {
-    margin-top: 0.4rem;
-    color: var(--color-fg-slate-muted);
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-  }
-
-  .energy-field-readout {
+  .energy-constellation-label {
     position: absolute;
     display: grid;
-    gap: 0.28rem;
-    min-width: 8.5rem;
-    padding: 0.75rem 0.9rem;
-    border-left: 2px solid var(--color-ember);
-    background: rgb(11 16 21 / 0.76);
+    gap: 0.25rem;
+    width: 10.5rem;
+    border-top: 1px solid var(--color-slate-line);
+    padding-top: 0.7rem;
+  }
+
+  .energy-constellation-label > span,
+  .energy-constellation-label > em {
+    color: var(--color-fg-slate-muted);
     font-family: var(--font-mono);
-    font-size: 0.57rem;
+    font-size: 0.58rem;
+    font-style: normal;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    backdrop-filter: blur(8px);
   }
 
-  .energy-field-readout strong {
-    color: var(--color-fg-slate);
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    text-transform: none;
-  }
-
-  .energy-field-readout > span:last-child {
-    color: var(--color-fg-slate-muted);
-  }
-
-  .energy-field-readout-index {
+  .energy-constellation-label > span {
     color: var(--color-ember);
   }
 
-  .energy-field-readout-gas { top: 22%; left: 7%; }
-  .energy-field-readout-power { top: 22%; right: 7%; border-left-color: var(--color-market-up); }
-  .energy-field-readout-power .energy-field-readout-index { color: var(--color-market-up); }
-  .energy-field-readout-trading { bottom: 19%; left: 50%; border-left-color: var(--color-fg-slate-muted); transform: translateX(-50%); }
-  .energy-field-readout-trading .energy-field-readout-index { color: var(--color-fg-slate-muted); }
+  .energy-constellation-label > strong {
+    color: var(--color-fg-slate);
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
 
-  .energy-field-pulse {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    color: var(--color-market-up);
+  .energy-constellation-label-gas { top: 19%; left: 0; }
+  .energy-constellation-label-power { top: 23%; right: 0; }
+  .energy-constellation-label-power > span { color: var(--color-market-up); }
+  .energy-constellation-label-trading { bottom: 14%; left: 50%; transform: translateX(-50%); text-align: center; }
+  .energy-constellation-label-trading > span { color: var(--color-fg-slate-muted); }
+
+  .energy-constellation-caption {
+    position: absolute;
+    right: 0;
+    bottom: 0.3rem;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-slate-line);
+    padding-top: 0.7rem;
+    color: var(--color-fg-slate-muted);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
   .company-visual {
@@ -756,11 +755,16 @@
     .market-ticker-note { display: none; }
     .market-ticker-status { padding-inline: 0.8rem; }
     .market-ticker-item { padding-inline: 1rem; }
-    .energy-field { min-height: 30rem; }
-    .energy-field-readout { min-width: 7.2rem; padding: 0.6rem; }
-    .energy-field-readout-gas { top: 19%; left: 4%; }
-    .energy-field-readout-power { top: 19%; right: 4%; }
-    .energy-field-readout-trading { bottom: 18%; }
+    .energy-constellation { min-height: 28rem; margin-top: 1.5rem; }
+    .energy-constellation-core { width: 7rem; height: 7rem; }
+    .energy-constellation-core svg { height: 3.5rem; }
+    .energy-constellation-core-glow { width: 8.5rem; height: 8.5rem; }
+    .energy-constellation-core-ring { width: 10rem; height: 10rem; }
+    .energy-constellation-label { width: 8.6rem; }
+    .energy-constellation-label > strong { font-size: 1.05rem; }
+    .energy-constellation-label-gas { top: 20%; }
+    .energy-constellation-label-power { top: 25%; }
+    .energy-constellation-label-trading { bottom: 15%; }
     .route-signal { grid-template-columns: 5.5rem 1fr; gap: 1rem; }
   }
 
