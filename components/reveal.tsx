@@ -6,6 +6,7 @@ import {
   useEffect,
   useRef,
   useState,
+  type ComponentPropsWithoutRef,
   type ElementType,
   type ReactNode,
 } from "react";
@@ -24,20 +25,26 @@ const ENTRANCE = "cubic-bezier(0.22, 1, 0.36, 1)";
  * WipeLines, which reads this context and writes inline styles — that path is
  * immune to stylesheet ordering entirely.
  */
-export function Reveal({
+type RevealProps<T extends ElementType> = {
+  children: ReactNode;
+  as?: T;
+  className?: string;
+  /** Fires on load — for above-the-fold content that shouldn't wait on scroll */
+  immediate?: boolean;
+  delay?: number;
+} & Omit<ComponentPropsWithoutRef<T>, "children" | "className">;
+
+export function Reveal<T extends ElementType = "div">({
   children,
-  as: Tag = "div",
+  as,
   className = "",
   /** Fires on load — for above-the-fold content that shouldn't wait on scroll */
   immediate = false,
   delay = 0,
-}: {
-  children: ReactNode;
-  as?: ElementType;
-  className?: string;
-  immediate?: boolean;
-  delay?: number;
-}) {
+  ...elementProps
+}: RevealProps<T>) {
+  const Tag = as || "div";
+  const RenderTag = Tag as ElementType;
   const ref = useRef<HTMLElement | null>(null);
   const [mounted, setMounted] = useState(false);
   const [inView, setInView] = useState(false);
@@ -86,12 +93,13 @@ export function Reveal({
 
   return (
     <RevealCtx.Provider value={inView}>
-      <Tag
-        ref={ref as React.Ref<HTMLElement>}
+      <RenderTag
+        {...(elementProps as Record<string, unknown>)}
+        ref={ref as never}
         className={`${className}${mounted && !inView ? " reveal-hidden" : ""}`}
       >
         {children}
-      </Tag>
+      </RenderTag>
     </RevealCtx.Provider>
   );
 }
