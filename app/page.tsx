@@ -56,28 +56,16 @@ export default function HomePage() {
   return (
     <div className="home-page">
       <section className="home-hero">
-        <div className="home-hero-image-wrap" aria-hidden="true">
-          <img
-            className="home-hero-image"
-            src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1800&q=88"
-            alt=""
-          />
-          <div className="home-hero-image-wash" />
-          <div className="home-hero-image-stamp">
-            <GroupMark className="h-9 w-auto text-ember" />
-            <span>Energy infrastructure<br />from Abuja</span>
-          </div>
-        </div>
-
         <div className="home-container home-hero-inner">
           <Reveal className="home-hero-copy" immediate>
             <span className="home-kicker">Suez Group / Abuja, Nigeria</span>
             <h1>
-              The energy people<br />
+              The energy<br />
+              people<br />
               <em>count on.</em>
             </h1>
             <p>
-              Suez Group connects cooking gas, electricity payments and bulk energy logistics through one operating network.
+              One operating group connecting cooking gas, electricity payments and bulk energy logistics across Abuja.
             </p>
             <div className="home-actions">
               <Link href="/companies" className="home-button home-button-primary">
@@ -87,14 +75,41 @@ export default function HomePage() {
                 Talk to the group <span aria-hidden="true">→</span>
               </Link>
             </div>
+
+            <div className="home-hero-proof" aria-label="Suez Group at a glance">
+              <div>
+                <strong>01</strong>
+                <span>Group platform</span>
+              </div>
+              <div>
+                <strong>03</strong>
+                <span>Operating lanes</span>
+              </div>
+              <div>
+                <strong>12+</strong>
+                <span>Years moving energy</span>
+              </div>
+            </div>
           </Reveal>
 
-          <Reveal className="home-hero-note" immediate delay={160}>
-            <div className="home-hero-note-mark">01</div>
-            <p>
-              We built the route first, then added the products worth sending down it.
-            </p>
-            <span>Operating since 2012</span>
+          <Reveal className="home-hero-media" immediate delay={160}>
+            <div className="home-hero-media-index">01 / 03 <span>Energy infrastructure</span></div>
+            <div className="home-hero-image-wrap">
+              <img
+                className="home-hero-image"
+                src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1800&q=88"
+                alt="Power lines crossing a wide landscape at golden hour"
+              />
+              <div className="home-hero-image-wash" />
+              <div className="home-hero-image-stamp">
+                <GroupMark className="h-9 w-auto text-ember" />
+                <span>Energy infrastructure<br />from Abuja</span>
+              </div>
+              <div className="home-hero-note">
+                <div className="home-hero-note-mark">Our route</div>
+                <p>Built for the everyday energy people depend on.</p>
+              </div>
+            </div>
           </Reveal>
         </div>
 

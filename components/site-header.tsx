@@ -24,8 +24,8 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-3 top-3 z-50 sm:inset-x-5 sm:top-5">
-      <div className="site-nav mx-auto flex w-full max-w-[86rem] items-center justify-between rounded-full border border-slate-line bg-slate/90 pl-4 pr-2 shadow-[0_16px_50px_rgb(23_37_40_/_0.08)] backdrop-blur-xl sm:pl-6">
+    <header className="fixed inset-x-4 top-4 z-50 sm:inset-x-6 sm:top-6">
+      <div className="site-nav mx-auto flex w-full max-w-[72rem] items-center justify-between rounded-[1.1rem] border border-slate-line bg-slate/94 px-3 py-2 shadow-[0_16px_50px_rgb(23_37_40_/_0.08)] backdrop-blur-xl sm:px-4">
         <Wordmark />
 
         <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
@@ -47,7 +47,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Link href="/companies" className="btn btn-ember hidden sm:inline-flex">
+          <Link href="/companies" className="btn btn-ember header-cta hidden sm:inline-flex">
             Explore the group
           </Link>
 
