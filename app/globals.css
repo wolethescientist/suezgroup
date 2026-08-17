@@ -1279,6 +1279,1055 @@
   }
 }
 
+@layer components {
+  /* Immersive home direction: industrial night, living grid, one orange signal. */
+  .immersive-home {
+    --home-ink: #081719;
+    --home-ink-soft: #0d2527;
+    --home-ink-raised: #143335;
+    --home-paper: #f5f1e8;
+    --home-paper-muted: #a9b8b2;
+    --home-line: rgb(225 236 226 / 0.16);
+    --home-orange: #e66e28;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 75% 8%, rgb(230 110 40 / 0.1), transparent 24rem),
+      radial-gradient(circle at 8% 38%, rgb(64 140 124 / 0.12), transparent 30rem),
+      var(--home-ink);
+    color: var(--home-paper);
+  }
+
+  .site-header-home {
+    --color-slate: #0d2527;
+    --color-slate-2: #143335;
+    --color-slate-line: rgb(225 236 226 / 0.18);
+    --color-fg-slate: #f5f1e8;
+    --color-fg-slate-muted: #a9b8b2;
+    --color-fg-paper: #f5f1e8;
+    --color-fg-paper-muted: #a9b8b2;
+  }
+
+  .site-header-home .site-nav {
+    border-color: rgb(225 236 226 / 0.18);
+    background: rgb(8 23 25 / 0.78) !important;
+    box-shadow: 0 20px 60px rgb(0 0 0 / 0.2), inset 0 1px 0 rgb(255 255 255 / 0.06);
+  }
+
+  .immersive-home::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(90deg, transparent 0 49.95%, rgb(225 236 226 / 0.035) 50%, transparent 50.05%),
+      linear-gradient(0deg, transparent 0 49.95%, rgb(225 236 226 / 0.025) 50%, transparent 50.05%);
+    background-size: 7rem 7rem;
+    opacity: 0.4;
+    pointer-events: none;
+    content: "";
+  }
+
+  .immersive-hero {
+    position: relative;
+    min-height: min(54rem, 100dvh);
+    overflow: hidden;
+    background: linear-gradient(145deg, rgb(5 18 20 / 0.8), rgb(8 23 25 / 0.94));
+  }
+
+  .immersive-hero-grid {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, transparent 0 16%, rgb(225 236 226 / 0.06) 16.1%, transparent 16.2%),
+      linear-gradient(90deg, transparent 0 84%, rgb(225 236 226 / 0.04) 84.1%, transparent 84.2%),
+      repeating-linear-gradient(90deg, transparent 0 8rem, rgb(225 236 226 / 0.035) 8.05rem 8.1rem),
+      repeating-linear-gradient(0deg, transparent 0 8rem, rgb(225 236 226 / 0.025) 8.05rem 8.1rem);
+    mask-image: linear-gradient(180deg, black, transparent 92%);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .immersive-hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    pointer-events: none;
+  }
+
+  .immersive-hero-glow-one {
+    top: 10%;
+    right: 16%;
+    width: 20rem;
+    height: 20rem;
+    background: rgb(230 110 40 / 0.18);
+    animation: immersive-glow 9s ease-in-out infinite alternate;
+  }
+
+  .immersive-hero-glow-two {
+    bottom: -9rem;
+    left: 34%;
+    width: 27rem;
+    height: 27rem;
+    background: rgb(38 116 102 / 0.18);
+    animation: immersive-glow 12s ease-in-out -3s infinite alternate-reverse;
+  }
+
+  .immersive-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    min-height: min(54rem, 100dvh);
+    grid-template-columns: minmax(0, 0.92fr) minmax(24rem, 1.08fr);
+    align-items: center;
+    gap: clamp(3rem, 8vw, 9rem);
+    padding-top: clamp(8rem, 12vw, 10rem);
+    padding-bottom: clamp(7rem, 10vw, 9rem);
+  }
+
+  .immersive-hero-copy {
+    max-width: 39rem;
+  }
+
+  .immersive-kicker,
+  .immersive-hero-visual-topline,
+  .immersive-hero-footer,
+  .immersive-section-kicker,
+  .immersive-lane-content > span,
+  .immersive-lane-card-content > span {
+    color: var(--home-paper-muted);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .immersive-kicker {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .immersive-kicker span:first-child {
+    color: var(--home-orange);
+  }
+
+  .immersive-kicker span + span {
+    padding-left: 1rem;
+    border-left: 1px solid var(--home-line);
+  }
+
+  .immersive-hero-copy h1 {
+    max-width: 11ch;
+    margin-top: 2rem;
+    color: var(--home-paper);
+    font-family: var(--font-sans);
+    font-size: clamp(4rem, 6.3vw, 7.2rem);
+    font-weight: 600;
+    line-height: 0.86;
+    letter-spacing: -0.09em;
+  }
+
+  .immersive-hero-copy h1 span,
+  .immersive-hero-copy h1 em {
+    display: block;
+  }
+
+  .immersive-hero-copy h1 span:nth-child(2) {
+    color: rgb(245 241 232 / 0.74);
+  }
+
+  .immersive-hero-copy h1 em {
+    color: var(--home-orange);
+    font-style: normal;
+  }
+
+  .immersive-hero-copy p {
+    max-width: 29rem;
+    margin-top: 2rem;
+    color: var(--home-paper-muted);
+    font-size: clamp(1rem, 1.25vw, 1.16rem);
+    line-height: 1.65;
+  }
+
+  .immersive-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.35rem;
+    margin-top: 2.5rem;
+  }
+
+  .immersive-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    min-height: 3.35rem;
+    padding: 0.55rem 0.7rem 0.55rem 1.35rem;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.045em;
+    transition: transform 420ms var(--ease-out-expo), background-color 420ms var(--ease-out-expo), border-color 420ms var(--ease-out-expo), color 420ms var(--ease-out-expo);
+  }
+
+  .immersive-button span {
+    display: grid;
+    width: 2.2rem;
+    height: 2.2rem;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 1rem;
+    transition: transform 420ms var(--ease-out-expo), background-color 420ms var(--ease-out-expo);
+  }
+
+  .immersive-button:hover {
+    transform: translateY(-3px);
+  }
+
+  .immersive-button:hover span {
+    transform: translate(3px, -2px) scale(1.05);
+  }
+
+  .immersive-button:active {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  .immersive-button-primary {
+    background: var(--home-orange);
+    color: var(--home-ink);
+  }
+
+  .immersive-button-primary span {
+    background: rgb(8 23 25 / 0.16);
+  }
+
+  .immersive-button-quiet {
+    padding-left: 0;
+    color: var(--home-paper);
+  }
+
+  .immersive-button-quiet span {
+    width: auto;
+    height: auto;
+    background: transparent;
+  }
+
+  .immersive-button-light {
+    background: var(--home-paper);
+    color: var(--home-ink);
+  }
+
+  .immersive-button-light span {
+    background: rgb(8 23 25 / 0.1);
+  }
+
+  .immersive-hero-visual {
+    position: relative;
+    padding-top: 1.5rem;
+  }
+
+  .immersive-hero-visual-topline {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .immersive-hero-visual-topline span:first-child {
+    color: var(--home-orange);
+    font-family: var(--font-mono);
+  }
+
+  .immersive-hero-frame {
+    position: relative;
+    height: min(40rem, 68dvh);
+    min-height: 31rem;
+    overflow: hidden;
+    border: 1px solid rgb(225 236 226 / 0.2);
+    border-radius: 1.5rem;
+    background: var(--home-ink-raised);
+    box-shadow: 0 30px 90px rgb(0 0 0 / 0.26), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  }
+
+  .immersive-hero-frame img,
+  .immersive-lane-feature > img,
+  .immersive-lane-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.78) contrast(1.08);
+    transition: transform 1100ms var(--ease-out-expo), filter 1100ms var(--ease-out-expo);
+  }
+
+  .immersive-hero-frame:hover img,
+  .immersive-lane-feature:hover > img,
+  .immersive-lane-card:hover .immersive-lane-card-image img {
+    filter: saturate(1) contrast(1.04);
+    transform: scale(1.06);
+  }
+
+  .immersive-hero-frame-wash,
+  .immersive-lane-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(8 23 25 / 0.04) 30%, rgb(8 23 25 / 0.88) 100%);
+  }
+
+  .immersive-hero-frame-copy {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .immersive-hero-frame-copy span,
+  .immersive-hero-frame-mark span {
+    color: var(--home-orange);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .immersive-hero-frame-copy strong {
+    max-width: 13ch;
+    color: var(--home-paper);
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.7vw, 2.6rem);
+    font-weight: 500;
+    line-height: 0.98;
+  }
+
+  .immersive-hero-frame-mark {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .immersive-hero-frame-mark span {
+    color: var(--home-paper);
+    font-size: 0.58rem;
+    line-height: 1.4;
+  }
+
+  .immersive-hero-orbit {
+    position: absolute;
+    top: -2.5rem;
+    right: -2.5rem;
+    width: 9rem;
+    height: 9rem;
+    border: 1px solid rgb(230 110 40 / 0.55);
+    border-radius: 50%;
+    animation: immersive-orbit 14s linear infinite;
+  }
+
+  .immersive-hero-orbit::before,
+  .immersive-hero-orbit::after {
+    position: absolute;
+    border: 1px solid rgb(230 110 40 / 0.2);
+    border-radius: 50%;
+    content: "";
+  }
+
+  .immersive-hero-orbit::before {
+    inset: 1rem;
+  }
+
+  .immersive-hero-orbit::after {
+    inset: 2rem;
+  }
+
+  .immersive-hero-orbit span {
+    position: absolute;
+    top: 0.65rem;
+    left: 50%;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: var(--home-orange);
+    box-shadow: 0 0 18px rgb(230 110 40 / 0.9);
+  }
+
+  .immersive-hero-orbit span + span {
+    top: auto;
+    right: 1.7rem;
+    bottom: 1.1rem;
+    left: auto;
+    background: var(--home-paper);
+    box-shadow: 0 0 18px rgb(245 241 232 / 0.7);
+  }
+
+  .immersive-hero-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.1rem;
+    padding-bottom: 1.1rem;
+    border-top: 1px solid var(--home-line);
+  }
+
+  .immersive-hero-footer span:last-child {
+    color: var(--home-orange);
+  }
+
+  .immersive-marquee {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--home-line);
+    border-bottom: 1px solid var(--home-line);
+    background: var(--home-orange);
+    color: var(--home-ink);
+  }
+
+  .immersive-marquee-track {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5.5rem);
+    padding-block: 1rem;
+    animation: immersive-marquee 30s linear infinite;
+  }
+
+  .immersive-marquee-track span {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .immersive-marquee-track i {
+    font-size: 1.05rem;
+    font-style: normal;
+  }
+
+  .immersive-section {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(7rem, 12vw, 12rem);
+  }
+
+  .immersive-network {
+    background:
+      radial-gradient(circle at 84% 38%, rgb(38 116 102 / 0.16), transparent 26rem),
+      var(--home-ink-soft);
+  }
+
+  .immersive-section-intro {
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.36fr) minmax(0, 1fr);
+    gap: clamp(2rem, 8vw, 9rem);
+  }
+
+  .immersive-section-kicker {
+    align-self: start;
+    padding-top: 0.65rem;
+    color: var(--home-orange);
+  }
+
+  .immersive-section-kicker::before {
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    margin: 0 0.7rem 0.2rem 0;
+    background: currentColor;
+    content: "";
+  }
+
+  .immersive-section-intro h2,
+  .immersive-paths h2,
+  .immersive-bridge h2,
+  .immersive-cta h2 {
+    max-width: 12ch;
+    color: var(--home-paper);
+    font-family: var(--font-sans);
+    font-size: clamp(3rem, 6vw, 6.3rem);
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.085em;
+  }
+
+  .immersive-section-intro h2 em,
+  .immersive-bridge h2 em {
+    color: var(--home-orange);
+    font-style: normal;
+  }
+
+  .immersive-section-intro p,
+  .immersive-paths > .home-container > div:first-child p {
+    max-width: 32rem;
+    margin-top: 1.75rem;
+    color: var(--home-paper-muted);
+    font-size: 1.06rem;
+    line-height: 1.7;
+  }
+
+  .immersive-lane-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr);
+    gap: 1.25rem;
+    margin-top: clamp(4rem, 8vw, 8rem);
+  }
+
+  .immersive-lane-feature,
+  .immersive-lane-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--home-line);
+    border-radius: 1.4rem;
+    background: var(--home-ink-raised);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+  }
+
+  .immersive-lane-feature {
+    min-height: 45rem;
+  }
+
+  .immersive-lane-content {
+    position: absolute;
+    right: clamp(1.5rem, 4vw, 3rem);
+    bottom: clamp(1.5rem, 4vw, 3rem);
+    left: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .immersive-lane-content > span,
+  .immersive-lane-card-content > span {
+    color: var(--home-orange);
+  }
+
+  .immersive-lane-content h3 {
+    margin-top: 0.85rem;
+    color: var(--home-paper);
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 4vw, 4.2rem);
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.07em;
+  }
+
+  .immersive-lane-content p {
+    max-width: 27rem;
+    margin-top: 1rem;
+    color: rgb(245 241 232 / 0.72);
+    line-height: 1.55;
+  }
+
+  .immersive-lane-content a,
+  .immersive-lane-card-content a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 1.5rem;
+    color: var(--home-paper);
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: color 320ms var(--ease-out-expo), gap 320ms var(--ease-out-expo);
+  }
+
+  .immersive-lane-content a:hover,
+  .immersive-lane-card-content a:hover {
+    gap: 1rem;
+    color: var(--home-orange);
+  }
+
+  .immersive-lane-content b,
+  .immersive-lane-card-content b {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .immersive-lane-side {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .immersive-lane-card {
+    display: grid;
+    min-height: 21.9rem;
+    grid-template-columns: 0.82fr 1.18fr;
+  }
+
+  .immersive-lane-card-image {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+  .immersive-lane-card-image > span {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: var(--home-orange);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+
+  .immersive-lane-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(1.4rem, 3vw, 2.4rem);
+  }
+
+  .immersive-lane-card-content h3 {
+    max-width: 8ch;
+    margin-top: 0.7rem;
+    color: var(--home-paper);
+    font-family: var(--font-sans);
+    font-size: clamp(1.55rem, 2.5vw, 2.5rem);
+    font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+  }
+
+  .immersive-lane-card-content p {
+    margin-top: 0.85rem;
+    color: var(--home-paper-muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .immersive-lane-card-content a {
+    margin-top: auto;
+  }
+
+  .immersive-bridge {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 80% 25%, rgb(230 110 40 / 0.2), transparent 24rem),
+      #102e30;
+  }
+
+  .immersive-bridge-lines {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(142deg, transparent 0 23%, rgb(230 110 40 / 0.18) 23.1%, transparent 23.2%),
+      linear-gradient(12deg, transparent 0 66%, rgb(245 241 232 / 0.08) 66.1%, transparent 66.2%);
+    mask-image: linear-gradient(90deg, transparent, black 22%, black 78%, transparent);
+  }
+
+  .immersive-bridge-lines span {
+    position: absolute;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--home-orange);
+    box-shadow: 0 0 0 0 rgb(230 110 40 / 0.45);
+    animation: immersive-route-pulse 3.4s ease-out infinite;
+  }
+
+  .immersive-bridge-lines span:nth-child(1) { top: 23%; left: 25%; }
+  .immersive-bridge-lines span:nth-child(2) { top: 57%; left: 52%; animation-delay: 1.1s; }
+  .immersive-bridge-lines span:nth-child(3) { top: 33%; right: 17%; animation-delay: 2.1s; }
+
+  .immersive-bridge-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+    gap: clamp(3rem, 9vw, 10rem);
+    align-items: end;
+    padding-block: clamp(7rem, 13vw, 13rem);
+  }
+
+  .immersive-bridge h2 {
+    max-width: 10ch;
+  }
+
+  .immersive-bridge-copy {
+    max-width: 23rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .immersive-bridge-route {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--home-paper);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .immersive-bridge-route i {
+    width: 2.4rem;
+    height: 1px;
+    background: var(--home-orange);
+  }
+
+  .immersive-bridge-copy p {
+    margin-top: 2rem;
+    color: var(--home-paper-muted);
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .immersive-paths {
+    background: var(--home-ink);
+  }
+
+  .immersive-paths-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(24rem, 1.3fr);
+    gap: clamp(3rem, 9vw, 10rem);
+  }
+
+  .immersive-paths h2 {
+    max-width: 9ch;
+    margin-top: 1.2rem;
+  }
+
+  .immersive-path-list {
+    border-top: 1px solid var(--home-line);
+  }
+
+  .immersive-path-list a {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 1.35rem;
+    border-bottom: 1px solid var(--home-line);
+    transition: padding 360ms var(--ease-out-expo), background-color 360ms var(--ease-out-expo), color 360ms var(--ease-out-expo);
+  }
+
+  .immersive-path-list a:hover {
+    padding-inline: 1rem;
+    background: rgb(255 255 255 / 0.04);
+    color: var(--home-orange);
+  }
+
+  .immersive-path-number {
+    color: var(--home-orange);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+
+  .immersive-path-copy {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .immersive-path-copy strong {
+    color: var(--home-paper);
+    font-family: var(--font-sans);
+    font-size: clamp(1.1rem, 2vw, 1.65rem);
+    font-weight: 500;
+    line-height: 1.1;
+  }
+
+  .immersive-path-copy small {
+    color: var(--home-paper-muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+  }
+
+  .immersive-path-arrow {
+    color: var(--home-paper);
+    font-size: 1.25rem;
+    transition: transform 360ms var(--ease-out-expo);
+  }
+
+  .immersive-path-list a:hover .immersive-path-arrow {
+    transform: translate(4px, -3px);
+  }
+
+  .immersive-cta {
+    position: relative;
+    overflow: hidden;
+    background: var(--home-orange);
+    color: var(--home-ink);
+  }
+
+  .immersive-cta-grid {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(100deg, transparent 0 28%, rgb(8 23 25 / 0.13) 28.1%, transparent 28.2%),
+      repeating-linear-gradient(90deg, transparent 0 7rem, rgb(8 23 25 / 0.09) 7.05rem 7.1rem);
+    mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+  }
+
+  .immersive-cta-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(2rem, 6vw, 7rem);
+    padding-block: clamp(5rem, 10vw, 9rem);
+  }
+
+  .immersive-cta .immersive-section-kicker {
+    color: var(--home-ink);
+  }
+
+  .immersive-cta .immersive-section-kicker::before {
+    background: var(--home-ink);
+  }
+
+  .immersive-cta h2 {
+    max-width: 9ch;
+    margin-top: 1rem;
+    color: var(--home-ink);
+  }
+
+  .immersive-cta-mark {
+    animation: immersive-mark-float 5s ease-in-out infinite;
+  }
+
+  @keyframes immersive-glow {
+    from { transform: translate3d(-1rem, 0, 0) scale(0.92); opacity: 0.55; }
+    to { transform: translate3d(1.5rem, 1rem, 0) scale(1.08); opacity: 0.95; }
+  }
+
+  @keyframes immersive-orbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes immersive-marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+
+  @keyframes immersive-route-pulse {
+    0% { box-shadow: 0 0 0 0 rgb(230 110 40 / 0.5); opacity: 0.75; }
+    60% { box-shadow: 0 0 0 1.3rem rgb(230 110 40 / 0); opacity: 1; }
+    100% { box-shadow: 0 0 0 1.3rem rgb(230 110 40 / 0); opacity: 0.75; }
+  }
+
+  @keyframes immersive-mark-float {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-0.5rem) rotate(2deg); }
+  }
+
+  @media (max-width: 62rem) {
+    .immersive-hero-inner {
+      grid-template-columns: minmax(0, 0.9fr) minmax(19rem, 1.1fr);
+      gap: 3rem;
+    }
+
+    .immersive-hero-copy h1 {
+      font-size: clamp(3.8rem, 7.4vw, 6.7rem);
+    }
+
+    .immersive-lane-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .immersive-lane-feature {
+      min-height: 38rem;
+    }
+
+    .immersive-lane-side {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .immersive-lane-card {
+      display: block;
+    }
+
+    .immersive-lane-card-image {
+      height: 13rem;
+    }
+
+    .immersive-lane-card-content {
+      min-height: 17rem;
+    }
+
+    .immersive-cta-inner {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .immersive-cta-inner > .immersive-button {
+      grid-column: 2;
+      justify-self: start;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .immersive-hero {
+      min-height: auto;
+    }
+
+    .immersive-hero-inner {
+      display: block;
+      min-height: auto;
+      padding-top: 7rem;
+      padding-bottom: 4rem;
+    }
+
+    .immersive-hero-copy h1 {
+      max-width: 11ch;
+      margin-top: 1.4rem;
+      font-size: clamp(3.6rem, 16vw, 6rem);
+    }
+
+    .immersive-hero-copy p {
+      margin-top: 1.65rem;
+    }
+
+    .immersive-actions {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1.15rem;
+      margin-top: 2rem;
+    }
+
+    .immersive-hero-visual {
+      margin-top: 4.5rem;
+    }
+
+    .immersive-hero-frame {
+      height: 28rem;
+      min-height: 0;
+      border-radius: 1.1rem;
+    }
+
+    .immersive-hero-frame-copy {
+      bottom: 1.35rem;
+      left: 1.35rem;
+    }
+
+    .immersive-hero-frame-mark {
+      top: 1.2rem;
+      right: 1.2rem;
+    }
+
+    .immersive-hero-orbit {
+      top: -1.4rem;
+      right: -1.4rem;
+      width: 6rem;
+      height: 6rem;
+    }
+
+    .immersive-hero-footer {
+      position: static;
+      flex-wrap: wrap;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .immersive-hero-footer span:last-child {
+      width: 100%;
+    }
+
+    .immersive-section-intro,
+    .immersive-bridge-inner,
+    .immersive-paths-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .immersive-section-intro h2,
+    .immersive-paths h2,
+    .immersive-bridge h2,
+    .immersive-cta h2 {
+      max-width: 10ch;
+      font-size: clamp(3rem, 13vw, 5rem);
+    }
+
+    .immersive-lane-side {
+      grid-template-columns: 1fr;
+    }
+
+    .immersive-lane-feature {
+      min-height: 32rem;
+    }
+
+    .immersive-lane-card {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+
+    .immersive-lane-card-image {
+      height: auto;
+    }
+
+    .immersive-lane-card-content {
+      min-height: 18rem;
+    }
+
+    .immersive-path-list a:hover {
+      padding-inline: 0;
+    }
+
+    .immersive-cta-inner {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .immersive-cta-mark {
+      height: 5rem;
+    }
+
+    .immersive-cta-inner > .immersive-button {
+      grid-column: auto;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .immersive-hero-copy h1 {
+      font-size: clamp(3.4rem, 15.5vw, 5.2rem);
+    }
+
+    .immersive-lane-card {
+      display: block;
+    }
+
+    .immersive-lane-card-image {
+      height: 12rem;
+    }
+
+    .immersive-lane-card-content {
+      min-height: 16rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .immersive-hero-glow-one,
+    .immersive-hero-glow-two,
+    .immersive-hero-orbit,
+    .immersive-marquee-track,
+    .immersive-bridge-lines span,
+    .immersive-cta-mark {
+      animation: none;
+    }
+
+    .immersive-button,
+    .immersive-button span,
+    .immersive-hero-frame img,
+    .immersive-lane-feature > img,
+    .immersive-lane-card-image img,
+    .immersive-lane-content a,
+    .immersive-lane-card-content a,
+    .immersive-path-list a,
+    .immersive-path-arrow {
+      transition: none;
+    }
+  }
+}
+
 @layer utilities {
   .grain {
     position: fixed;

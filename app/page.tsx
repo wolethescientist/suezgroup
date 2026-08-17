@@ -17,9 +17,8 @@ const OPERATING_LANES = [
     body: "Cooking gas for homes, estates, hospitality and commercial kitchens, delivered and weighed at the door.",
     href: "https://suezgas.com",
     image:
-      "https://images.pexels.com/photos/16271901/pexels-photo-16271901.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/16271901/pexels-photo-16271901.jpeg?auto=compress&cs=tinysrgb&w=1400",
     alt: "Workers handling LPG cylinders at a distribution facility",
-    tone: "orange",
   },
   {
     index: "02",
@@ -28,9 +27,8 @@ const OPERATING_LANES = [
     body: "Prepaid electricity tokens, wallets and agent kiosks that make power payments easier to reach.",
     href: "https://suezelectric.com",
     image:
-      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1400&q=88",
     alt: "Power lines crossing a wide landscape at golden hour",
-    tone: "ink",
   },
   {
     index: "03",
@@ -39,9 +37,8 @@ const OPERATING_LANES = [
     body: "LPG importation and road-tanker haulage for off-takers, plants and industrial customers.",
     href: "/companies#upstream",
     image:
-      "https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1400&q=88",
     alt: "Industrial pipes and infrastructure in a warm evening light",
-    tone: "stone",
   },
 ];
 
@@ -52,113 +49,114 @@ const VISITOR_PATHS = [
   ["I am an investor or partner", "Suez Group office", "Corporate and commercial enquiries", "/contact"],
 ];
 
+const MARQUEE_ITEMS = ["Cooking gas", "Digital power", "Bulk logistics", "Abuja", "One operating group"];
+
 export default function HomePage() {
   return (
-    <div className="home-page">
-      <section className="home-hero">
-        <div className="home-container home-hero-inner">
-          <Reveal className="home-hero-copy" immediate>
-            <span className="home-kicker">Suez Group / Abuja, Nigeria</span>
+    <div className="home-page immersive-home">
+      <section className="immersive-hero">
+        <div className="immersive-hero-grid" aria-hidden="true" />
+        <div className="immersive-hero-glow immersive-hero-glow-one" aria-hidden="true" />
+        <div className="immersive-hero-glow immersive-hero-glow-two" aria-hidden="true" />
+
+        <div className="home-container immersive-hero-inner">
+          <Reveal className="immersive-hero-copy" immediate>
+            <div className="immersive-kicker">
+              <span>Suez Group</span>
+              <span>Abuja / Nigeria</span>
+            </div>
             <h1>
-              The energy<br />
-              people<br />
-              <em>count on.</em>
+              <span>Energy for</span>
+              <span>the everyday</span>
+              <em>route.</em>
             </h1>
             <p>
-              One operating group connecting cooking gas, electricity payments and bulk energy logistics across Abuja.
+              We connect the fuel, power and logistics that keep homes, businesses and cities moving.
             </p>
-            <div className="home-actions">
-              <Link href="/companies" className="home-button home-button-primary">
+            <div className="immersive-actions">
+              <Link href="/companies" className="immersive-button immersive-button-primary">
                 Explore the group <span aria-hidden="true">↗</span>
               </Link>
-              <Link href="/contact" className="home-text-link">
-                Talk to the group <span aria-hidden="true">→</span>
+              <Link href="/contact" className="immersive-button immersive-button-quiet">
+                Start a conversation <span aria-hidden="true">→</span>
               </Link>
-            </div>
-
-            <div className="home-hero-proof" aria-label="Suez Group at a glance">
-              <div>
-                <strong>01</strong>
-                <span>Group platform</span>
-              </div>
-              <div>
-                <strong>03</strong>
-                <span>Operating lanes</span>
-              </div>
-              <div>
-                <strong>12+</strong>
-                <span>Years moving energy</span>
-              </div>
             </div>
           </Reveal>
 
-          <Reveal className="home-hero-media" immediate delay={160}>
-            <div className="home-hero-media-index">01 / 03 <span>Energy infrastructure</span></div>
-            <div className="home-hero-image-wrap">
-              <img
-                className="home-hero-image"
-                src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1800&q=88"
-                alt="Power lines crossing a wide landscape at golden hour"
-              />
-              <div className="home-hero-image-wash" />
-              <div className="home-hero-image-stamp">
-                <GroupMark className="h-9 w-auto text-ember" />
-                <span>Energy infrastructure<br />from Abuja</span>
+          <Reveal className="immersive-hero-visual" immediate delay={180}>
+            <div className="immersive-hero-visual-topline">
+              <span>01 / 03</span>
+              <span>Powering the everyday route</span>
+            </div>
+            <div className="immersive-hero-frame">
+              <img src={OPERATING_LANES[1].image} alt={OPERATING_LANES[1].alt} />
+              <div className="immersive-hero-frame-wash" />
+              <div className="immersive-hero-frame-copy">
+                <span>Built in Abuja</span>
+                <strong>Reliable energy<br />needs a reliable route.</strong>
               </div>
-              <div className="home-hero-note">
-                <div className="home-hero-note-mark">Our route</div>
-                <p>Built for the everyday energy people depend on.</p>
+              <div className="immersive-hero-frame-mark">
+                <GroupMark className="h-8 w-auto text-ember" />
+                <span>From the grid<br />to the doorstep</span>
               </div>
             </div>
+            <div className="immersive-hero-orbit" aria-hidden="true"><span /><span /></div>
           </Reveal>
         </div>
 
-        <div className="home-container home-hero-bottom">
+        <div className="home-container immersive-hero-footer">
           <span>One group</span>
-          <span>Three operating companies</span>
-          <span>LPG / electricity / haulage</span>
+          <span>Three operating lanes</span>
+          <span>Gas / electricity / haulage</span>
         </div>
       </section>
 
-      <section className="home-section home-section-intro">
-        <div className="home-container home-intro-grid">
-          <div className="home-section-label">The group at a glance</div>
-          <div>
-            <Reveal>
-              <h2>One route. Three ways to keep everyday life moving.</h2>
-              <p className="home-lede">
-                From the cylinder at a doorstep to a token on a phone, Suez Group works across the physical and digital sides of energy access in Abuja.
-              </p>
-            </Reveal>
-          </div>
+      <section className="immersive-marquee" aria-label="Suez Group operating lanes">
+        <div className="immersive-marquee-track">
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, index) => (
+            <span key={`${item}-${index}`}>{item}<i aria-hidden="true">↗</i></span>
+          ))}
+        </div>
+      </section>
+
+      <section className="immersive-section immersive-network">
+        <div className="home-container immersive-section-intro">
+          <div className="immersive-section-kicker">The group in motion</div>
+          <Reveal>
+            <h2>Different fronts.<br /><em>One operating rhythm.</em></h2>
+            <p>
+              Suez Group works across the physical and digital sides of energy access, joining the last mile to the larger route behind it.
+            </p>
+          </Reveal>
         </div>
 
-        <div className="home-container home-route-grid">
-          <Reveal className="home-route-feature">
+        <div className="home-container immersive-lane-grid">
+          <Reveal className="immersive-lane-feature">
             <img src={OPERATING_LANES[0].image} alt={OPERATING_LANES[0].alt} />
-            <div className="home-route-feature-overlay" />
-            <div className="home-route-feature-copy">
+            <div className="immersive-lane-overlay" />
+            <div className="immersive-lane-content">
               <span>{OPERATING_LANES[0].index} / {OPERATING_LANES[0].label}</span>
               <h3>{OPERATING_LANES[0].name}</h3>
               <p>{OPERATING_LANES[0].body}</p>
               <a href={OPERATING_LANES[0].href} target="_blank" rel="noopener noreferrer">
-                Visit operating company <span aria-hidden="true">↗</span>
+                Visit operating company <b aria-hidden="true">↗</b>
               </a>
             </div>
           </Reveal>
 
-          <div className="home-route-stack">
+          <div className="immersive-lane-side">
             {OPERATING_LANES.slice(1).map((lane, index) => (
-              <Reveal key={lane.name} className={`home-route-card home-route-card-${lane.tone}`} delay={index * 90}>
-                <div className="home-route-card-image">
+              <Reveal key={lane.name} className="immersive-lane-card" delay={index * 100}>
+                <div className="immersive-lane-card-image">
                   <img src={lane.image} alt={lane.alt} />
+                  <span>{lane.index}</span>
                 </div>
-                <div className="home-route-card-copy">
-                  <span>{lane.index} / {lane.label}</span>
+                <div className="immersive-lane-card-content">
+                  <span>{lane.label}</span>
                   <h3>{lane.name}</h3>
                   <p>{lane.body}</p>
                   <a href={lane.href} target={lane.href.startsWith("http") ? "_blank" : undefined} rel={lane.href.startsWith("http") ? "noopener noreferrer" : undefined}>
-                    Learn more <span aria-hidden="true">↗</span>
+                    Learn more <b aria-hidden="true">↗</b>
                   </a>
                 </div>
               </Reveal>
@@ -167,27 +165,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="home-section home-section-paths">
-        <div className="home-container home-paths-grid">
+      <section className="immersive-bridge">
+        <div className="immersive-bridge-lines" aria-hidden="true"><span /><span /><span /></div>
+        <div className="home-container immersive-bridge-inner">
           <Reveal>
-            <span className="home-kicker">Find the right front door</span>
-            <h2>Start with what brings you here.</h2>
-            <p className="home-lede">
-              Customers should reach the operating company directly. Suppliers, partners and investors can come to the group.
+            <div className="immersive-section-kicker">One connected route</div>
+            <h2>From the <em>cylinder</em> to the token to the tanker.</h2>
+          </Reveal>
+          <Reveal className="immersive-bridge-copy" delay={140}>
+            <div className="immersive-bridge-route" aria-hidden="true">
+              <span>Gas</span><i /><span>Power</span><i /><span>Logistics</span>
+            </div>
+            <p>
+              The format changes. The discipline does not: clear numbers, dependable movement and a direct answer when people need help.
             </p>
           </Reveal>
+        </div>
+      </section>
 
-          <Reveal className="home-path-list" delay={120}>
+      <section className="immersive-section immersive-paths">
+        <div className="home-container immersive-paths-grid">
+          <Reveal>
+            <div className="immersive-section-kicker">Find your route</div>
+            <h2>Start with what brings you here.</h2>
+            <p>Customers, partners and investors should all reach the right front door quickly.</p>
+          </Reveal>
+
+          <Reveal className="immersive-path-list" delay={120}>
             {VISITOR_PATHS.map(([who, company, detail, href], index) => {
               const external = href.startsWith("http");
               const content = (
                 <>
-                  <span className="home-path-index">0{index + 1}</span>
-                  <span className="home-path-copy">
+                  <span className="immersive-path-number">0{index + 1}</span>
+                  <span className="immersive-path-copy">
                     <strong>{who}</strong>
                     <small>{company} / {detail}</small>
                   </span>
-                  <span className="home-path-arrow" aria-hidden="true">↗</span>
+                  <span className="immersive-path-arrow" aria-hidden="true">↗</span>
                 </>
               );
               return external ? (
@@ -200,32 +214,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="home-section home-section-proof">
-        <div className="home-container home-proof-grid">
-          <div className="home-proof-stat">
-            <span>Since</span>
-            <strong>2012</strong>
-            <small>Built in Abuja, for Abuja</small>
-          </div>
-          <Reveal className="home-proof-copy">
-            <span className="home-kicker">What holds it together</span>
-            <h2>Physical supply. Digital reach.</h2>
-            <p>
-              The group moves between the cylinder, the token and the tanker while carrying the same operating discipline through each layer: make the number clear, make the route reliable, and answer when people need help.
-            </p>
-            <Link href="/about" className="home-text-link">Read about the group <span aria-hidden="true">→</span></Link>
+      <section className="immersive-cta">
+        <div className="immersive-cta-grid" aria-hidden="true" />
+        <div className="home-container immersive-cta-inner">
+          <GroupMark className="immersive-cta-mark h-24 w-auto text-ember" />
+          <Reveal>
+            <div className="immersive-section-kicker">For suppliers, partners and investors</div>
+            <h2>Put the right conversation in motion.</h2>
           </Reveal>
-        </div>
-      </section>
-
-      <section className="home-cta">
-        <div className="home-container home-cta-inner">
-          <GroupMark className="home-cta-mark h-28 w-auto text-ember" />
-          <div>
-            <span className="home-kicker">For suppliers, partners and investors</span>
-            <h2>Let&apos;s put the right conversation in motion.</h2>
-          </div>
-          <Link href="/contact" className="home-button home-button-light">
+          <Link href="/contact" className="immersive-button immersive-button-light">
             Contact the group <span aria-hidden="true">↗</span>
           </Link>
         </div>

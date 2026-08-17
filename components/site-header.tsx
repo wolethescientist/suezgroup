@@ -14,6 +14,7 @@ const NAV = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
@@ -24,9 +25,9 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-4 top-4 z-50 sm:inset-x-6 sm:top-6">
+    <header className={`fixed inset-x-4 top-4 z-50 sm:inset-x-6 sm:top-6 ${isHome ? "site-header-home" : ""}`}>
       <div className="site-nav mx-auto flex w-full max-w-[72rem] items-center justify-between rounded-[1.1rem] border border-slate-line bg-slate/94 px-3 py-2 shadow-[0_16px_50px_rgb(23_37_40_/_0.08)] backdrop-blur-xl sm:px-4">
-        <Wordmark />
+        <Wordmark tone={isHome ? "paper" : "slate"} />
 
         <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
           {NAV.map((item) => {

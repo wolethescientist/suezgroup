@@ -39,9 +39,11 @@ export function Reveal({
   delay?: number;
 }) {
   const ref = useRef<HTMLElement | null>(null);
+  const [mounted, setMounted] = useState(false);
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     let fired = false;
     const fire = () => {
       if (fired) return;
@@ -86,7 +88,7 @@ export function Reveal({
     <RevealCtx.Provider value={inView}>
       <Tag
         ref={ref as React.Ref<HTMLElement>}
-        className={`${className}${inView ? "" : " reveal-hidden"}`}
+        className={`${className}${mounted && !inView ? " reveal-hidden" : ""}`}
       >
         {children}
       </Tag>
