@@ -14,7 +14,7 @@ import {
 export const metadata: Metadata = {
   title: "About the group",
   description:
-    "How Suez Group grew from a single LPG distributor in 2012 into three companies covering import, haulage, cooking gas and prepaid electricity across Abuja.",
+    "How Suez Group grew from a single LPG distributor in 2012 into a connected network spanning Software, ICT, Gas, Trading and Electric services.",
 };
 
 const TIMELINE = [
@@ -35,8 +35,8 @@ const TIMELINE = [
   ],
   [
     "Today",
-    "Three companies, one network",
-    "Import and haulage upstream, LPG distribution and electricity vending downstream, with agent kiosks extending reach past the metropolis edge.",
+    "Five lanes, one network",
+    "Software and ICT support the group’s digital layer; Trading, Gas and Electric carry the network into homes, businesses and infrastructure.",
   ],
 ];
 
@@ -121,11 +121,12 @@ export default function AboutPage() {
             <div>
               <SectionTitle
                 title="The group on paper."
-                lede="Each operating company is separately incorporated in Nigeria and trades under its own name and registration."
+                lede="The group works across five lanes. Gas, Electric and Trading are operating businesses; Software and ICT are the digital capabilities connecting the network."
               />
               <div className="reveal mt-14">
                 <StatRow
                   items={[
+                    { label: "Service lanes", value: "Five", note: "Software · ICT · Gas · Trading · Electric" },
                     { label: "Suez Gas Nigeria", value: "RC 1076785", note: "Incorporated 2012" },
                     { label: "SuezElectric", value: "RC 1638998", note: "Platform live 2020" },
                     { label: "Registered base", value: "Wuse II", note: "20 Alexandria Crescent, Abuja" },
@@ -136,9 +137,9 @@ export default function AboutPage() {
               <p
                 className="reveal mt-12 max-w-2xl text-[0.6875rem] uppercase leading-relaxed tracking-[0.075em] text-fg-slate-muted"
               >
-                Suez Group is a trading name describing these companies
-                collectively. It is not itself a registered holding company, and
-                nothing on this site is an offer of securities.
+                Suez Group is a trading name describing the network collectively.
+                Legal responsibility for products, services and agreements remains
+                with the relevant operating business.
               </p>
             </div>
           </div>

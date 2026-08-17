@@ -4,6 +4,8 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Grain } from "@/components/texture";
+import { MarketRibbon } from "@/components/market-ribbon";
+import { SiteChat } from "@/components/site-chat";
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -19,11 +21,11 @@ export const metadata: Metadata = {
     template: "%s - Suez Group",
   },
   description:
-    "Suez Group brings together Suez Gas Nigeria, SuezElectric and Suez Trading International. LPG distribution, prepaid electricity vending, import and haulage from Wuse II, Abuja.",
+    "Suez Group connects Software, ICT, Gas, Trading and Electric services through one operating network from Abuja, Nigeria.",
   openGraph: {
     title: "Suez Group - An Abuja energy group",
     description:
-      "LPG distribution, prepaid electricity vending, and import and haulage, from Abuja.",
+    "Software, ICT, LPG distribution, prepaid electricity vending, import and haulage, from Abuja.",
     type: "website",
     locale: "en_NG",
     images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "Suez Group energy infrastructure" }],
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Suez Group - An Abuja energy group",
-    description: "Cooking gas, electricity, import and haulage from Abuja.",
+    description: "Software, ICT, cooking gas, electricity, import and haulage from Abuja.",
     images: ["/og-image.svg"],
   },
 };
@@ -57,9 +59,11 @@ export default function RootLayout({
           Skip to content
         </a>
         <Grain />
+        <MarketRibbon />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        <SiteChat />
       </body>
     </html>
   );

@@ -1,227 +1,133 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Strata, Web } from "@/components/texture";
-import { Reveal } from "@/components/reveal";
 import { PageHero, RailSection, SectionTitle } from "@/components/page-parts";
-import { CompanyVisual, RouteSignal } from "@/components/energy-visuals";
+import { Reveal } from "@/components/reveal";
+import { RouteSignal } from "@/components/energy-visuals";
 
 export const metadata: Metadata = {
-  title: "Our companies",
+  title: "Services & companies",
   description:
-    "Suez Gas Nigeria, SuezElectric and Suez Trading International. Meet the three operating companies of Suez Group and find the right one to reach.",
+    "Explore the five Suez Group lanes: Software, ICT, Gas, Trading and Electric.",
 };
 
-const COMPANIES = [
+const SERVICES = [
   {
-    index: 1,
-    label: "LPG",
-    name: "Suez Gas Nigeria Limited",
-    rc: "RC 1076785 · incorporated 7 November 2012",
+    id: "software",
+    number: "01",
+    label: "Software",
+    name: "Suez Software",
+    role: "Digital products & software platforms",
+    body: "Software is the group’s product layer: practical digital tools that make services easier to use, operate and scale. It turns the knowledge inside the network into products people can rely on.",
+    facts: [["Focus", "Digital products and platforms"], ["Works with", "Group services and operating teams"], ["Route", "Product thinking / useful tools"]],
+    tone: "software",
+    href: undefined,
+  },
+  {
+    id: "ict",
+    number: "02",
+    label: "ICT",
+    name: "Suez ICT",
+    role: "Systems, connectivity & technical infrastructure",
+    body: "ICT is the connective tissue behind the group: systems, integrations, technical support and the infrastructure that keeps people, information and services moving together.",
+    facts: [["Focus", "Connectivity and technical systems"], ["Works with", "Internal teams and service operations"], ["Route", "Systems / support / network"]],
+    tone: "ict",
+    href: undefined,
+  },
+  {
+    id: "gas",
+    number: "03",
+    label: "Gas",
+    name: "Suez Gas Nigeria",
     role: "Domestic & commercial LPG distribution",
-    body: [
-      "The oldest company in the group and the one that built the route. Suez Gas distributes and supplies domestic LPG and natural gas for residential, commercial and industrial use, and develops natural gas utilisation projects.",
-      "Cylinder refills from 3kg to 50kg with doorstep pick-up and return, bulk haulage, professional installation and consultancy. Every delivery is weighed on a digital scale in front of the customer.",
-    ],
-    facts: [
-      ["Serves", "Homes, estates, hotels, bars, bakeries"],
-      ["Cylinder range", "3 - 50 kg"],
-      ["Contact", "+234 816 800 3677"],
-    ],
-    href: "https://suezgas.com",
-    cta: "Visit suezgas.com",
-    visual: "gas" as const,
+    body: "Suez Gas distributes LPG for residential, commercial and industrial use. Cylinder refills range from 3kg to 50kg, with doorstep pick-up and return, bulk haulage and professional installation.",
+    facts: [["Serves", "Homes, estates, hotels, bars and bakeries"], ["Range", "3 - 50 kg cylinders"], ["Contact", "+234 816 800 3677"]],
+    tone: "gas",
+    href: "https://suezgas.vercel.app/",
   },
   {
-    index: 2,
-    label: "Power",
-    name: "SuezElectric Limited",
-    rc: "RC 1638998 · platform live since 2020",
-    role: "Prepaid electricity vending & e-payments",
-    body: [
-      "Incorporated to purchase and distribute power through electronic channels to domestic and industrial users. SuezElectric generates prepaid electricity tokens on demand, aggregated across multiple distribution companies and meter technologies.",
-      "Web and mobile apps with a wallet, a naira-to-unit calculator, retrievable transaction history and printable receipts, plus an agent network earning up to 3% commission from mobile kiosks.",
-    ],
-    facts: [
-      ["Serves", "Prepaid, postpaid and net-metered accounts"],
-      ["Channels", "Web, iOS, Android, agent kiosks"],
-      ["Contact", "+234 908 007 0070"],
-    ],
-    href: "https://suezelectric.com",
-    cta: "Visit suezelectric.com",
-    visual: "power" as const,
-  },
-  {
-    index: 3,
-    label: "Upstream",
+    id: "trading",
+    number: "04",
+    label: "Trading",
     name: "Suez Trading International",
-    rc: null,
     role: "LPG importation & bulk haulage",
-    body: [
-      "The group's upstream arm. Suez Trading imports LPG and distributes it to off-takers by road tanker, and holds the group's real-estate and infrastructure investment interests.",
-      "This position is why the downstream companies can price competitively. The group is not buying its product from a competitor.",
-    ],
-    facts: [
-      ["Serves", "Off-takers, plants, industrial sites"],
-      ["Mode", "Road tanker, contracted by volume"],
-      ["Contact", "Through the group"],
-    ],
-    href: null,
-    cta: null,
-    visual: "trading" as const,
+    body: "The upstream lane for LPG importation and road-tanker haulage. Suez Trading supplies off-takers, plants and industrial sites by volume and connects the group to its source markets.",
+    facts: [["Serves", "Off-takers, plants and industrial sites"], ["Mode", "Road tanker, contracted by volume"], ["Contact", "Through the group office"]],
+    tone: "trading",
+    href: undefined,
   },
-];
+  {
+    id: "electric",
+    number: "05",
+    label: "Electric",
+    name: "SuezElectric",
+    role: "Prepaid electricity vending & e-payments",
+    body: "SuezElectric generates prepaid electricity tokens on demand through web, mobile and agent channels, with a wallet, retrievable transaction history and printable receipts.",
+    facts: [["Serves", "Prepaid, postpaid and net-metered accounts"], ["Channels", "Web, iOS, Android and agent kiosks"], ["Contact", "+234 908 007 0070"]],
+    tone: "electric",
+    href: "https://suezelectric.vercel.app/",
+  },
+] as const;
+
+function ServiceGlyph({ tone }: { tone: (typeof SERVICES)[number]["tone"] }) {
+  return <span className={`service-glyph service-glyph-${tone}`} aria-hidden="true">{tone === "software" ? "⌘" : tone === "ict" ? "╱╲" : tone === "gas" ? "◒" : tone === "trading" ? "⌁" : "ϟ"}</span>;
+}
 
 export default function CompaniesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Operating companies"
-        lines={["Three front doors,", "one group."]}
-        lede="Each company is a separate legal entity trading under its own name. If you are buying, go straight to the one you need. The links are below."
+        eyebrow="Services & companies"
+        lines={["Five operating lanes,", "one group."]}
+        lede="Software, ICT, Gas, Trading and Electric. Each lane has a clear job; together they form the network behind Suez Group."
         aside={
           <div className="grid gap-10">
             <dl className="space-y-4 border-l border-slate-line pl-6">
-              {[
-                ["Sectors", "LPG · electricity · haulage"],
-                ["Shared base", "20 Alexandria Crescent, Wuse II"],
-                ["Group since", "2012"],
-              ].map(([k, v]) => (
-                <div key={k}>
-                  <dt className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-slate-muted">
-                    {k}
-                  </dt>
-                  <dd className="mt-1.5 text-[0.9375rem]">{v}</dd>
-                </div>
-              ))}
+              <div><dt className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-slate-muted">Lanes</dt><dd className="mt-1.5 text-[0.9375rem]">Software · ICT · Gas · Trading · Electric</dd></div>
+              <div><dt className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-slate-muted">Shared base</dt><dd className="mt-1.5 text-[0.9375rem]">20 Alexandria Crescent, Wuse II</dd></div>
+              <div><dt className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-slate-muted">Group since</dt><dd className="mt-1.5 text-[0.9375rem]">2012</dd></div>
             </dl>
-            <RouteSignal label="Route architecture" value="one group / three doors" />
+            <RouteSignal label="Operating model" value="five lanes / one route" />
           </div>
         }
       />
 
-      {COMPANIES.map((c) => (
-        <RailSection
-          key={c.name}
-          index={c.index}
-          label={c.label}
-          id={c.index === 3 ? "upstream" : undefined}
-          tone={c.index === 2 ? "paper" : "slate"}
-        >
-          <SectionTitle title={c.name} />
-          <div
-            className={`mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.6875rem] uppercase tracking-[0.09em] ${
-              c.index === 2 ? "text-ember-ink" : "text-ember"
-            }`}
-          >
-            <span>{c.role}</span>
+      <section className="service-directory">
+        <div className="measure">
+          <div className="rail-index"><span>01</span><span>Directory</span></div>
+          <div className="service-directory-heading">
+            <Reveal><h2 className="text-display-m">Choose the part of the network you need.</h2><p>Some lanes are customer-facing businesses; Software and ICT are the digital capabilities that help the whole group work better.</p></Reveal>
           </div>
-          {c.rc && (
-            <div
-              className={`mt-2 font-mono text-[0.75rem] ${
-                c.index === 2 ? "text-fg-paper-muted" : "text-fg-slate-muted"
-              }`}
-            >
-              {c.rc}
-            </div>
-          )}
+          <div className="service-directory-grid">
+            {SERVICES.map((service) => (
+              <a key={service.id} href={`#${service.id}`} className={`service-directory-card service-directory-card-${service.tone}`}>
+                <span>{service.number}</span><ServiceGlyph tone={service.tone} /><strong>{service.label}</strong><small>{service.role}</small><b aria-hidden="true">↓</b>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <Reveal className="reveal mt-10 grid gap-10 lg:grid-cols-[0.72fr_1.45fr_0.8fr] lg:gap-14">
-            <div style={{ "--i": 0 } as React.CSSProperties}>
-              <CompanyVisual kind={c.visual} />
+      {SERVICES.map((service, index) => (
+        <RailSection key={service.id} index={index + 2} label={service.label} id={service.id} tone={index % 2 === 1 ? "paper" : "slate"}>
+          <SectionTitle title={service.name} />
+          <div className={`service-detail service-detail-${service.tone}`}>
+            <div className="service-detail-visual"><ServiceGlyph tone={service.tone} /><span>{service.label} / {service.number}</span><small>{service.role}</small></div>
+            <div>
+              <p className="text-body-l text-fg-slate-muted">{service.body}</p>
+              {service.href ? <a className="btn btn-ember mt-8" href={service.href} target="_blank" rel="noopener noreferrer">Visit {service.label} <span aria-hidden="true">↗</span></a> : <Link className="btn btn-ghost mt-8" href="/contact">Ask about {service.label} <span aria-hidden="true">→</span></Link>}
             </div>
-            <div style={{ "--i": 1 } as React.CSSProperties}>
-              {c.body.map((p) => (
-                <p
-                  key={p}
-                  className={`mt-5 max-w-2xl text-body-l first:mt-0 ${
-                    c.index === 2 ? "text-fg-paper-muted" : "text-fg-slate-muted"
-                  }`}
-                >
-                  {p}
-                </p>
-              ))}
-              {c.href && (
-                <a
-                  href={c.href}
-                  className="btn btn-ember mt-9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {c.cta}
-                </a>
-              )}
-            </div>
-
-            <dl style={{ "--i": 2 } as React.CSSProperties}>
-              {c.facts.map(([k, v]) => (
-                <div key={k} className="border-t py-4">
-                  <dt
-                    className={`text-[0.6875rem] uppercase tracking-[0.09em] ${
-                      c.index === 2 ? "text-fg-paper-muted" : "text-fg-slate-muted"
-                    }`}
-                  >
-                    {k}
-                  </dt>
-                  <dd className="mt-1.5 text-[0.9375rem]">{v}</dd>
-                </div>
-              ))}
+            <dl className="service-facts">
+              {service.facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
             </dl>
-          </Reveal>
+          </div>
         </RailSection>
       ))}
 
-      {/* Advisers */}
-      <section className="relative overflow-hidden border-t border-slate-line py-20 lg:py-24">
-        <Strata tone="slate" opacity={0.5} />
-        <Reveal className="measure relative">
-          <div className="rail">
-            <div className="rail-index">
-              <span>
-                04
-                <span className="mt-1.5 block opacity-70">Advisers</span>
-              </span>
-            </div>
-            <div>
-              <SectionTitle
-                title="Partners and advisers."
-                lede="The group works with a standing set of technical, technology and advisory partners rather than rebuilding those functions in-house."
-              />
-              <Reveal className="reveal mt-12 grid gap-x-14 gap-y-8 sm:grid-cols-3">
-                {[
-                  ["Oribera Limited", "Technical partner", "Platform architecture and integrations"],
-                  ["Reimnet Limited", "Technology partner", "Application delivery and infrastructure"],
-                  ["Ashfar Limited", "Consultants", "Regulatory, commercial and financial advisory"],
-                ].map(([name, tag, body], i) => (
-                  <div
-                    key={name}
-                    className="border-t border-slate-line pt-6"
-                    style={{ "--i": i } as React.CSSProperties}
-                  >
-                    <h3 className="text-display-s">{name}</h3>
-                    <div className="mt-2 text-[0.6875rem] uppercase tracking-[0.09em] text-ember">
-                      {tag}
-                    </div>
-                    <p className="mt-3 text-fg-slate-muted">{body}</p>
-                  </div>
-                ))}
-              </Reveal>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
-      <section className="relative overflow-hidden border-t border-slate-line py-20 lg:py-24">
-        <Web origin={{ x: 82, y: 50 }} nodes={140} opacity={0.7} />
-        <Reveal className="measure relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="max-w-xl text-display-m">
-            Not sure which company you need?
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/contact" className="btn btn-ember">
-              Ask the group
-            </Link>
-          </div>
-        </Reveal>
+      <section className="service-closing">
+        <div className="measure flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div><div className="eyebrow">Need a route into the group?</div><h2 className="mt-7 max-w-xl text-display-m">Not sure which lane is yours?</h2></div>
+          <Link href="/contact" className="btn btn-ember">Ask the group <span aria-hidden="true">↗</span></Link>
+        </div>
       </section>
     </>
   );

@@ -13,6 +13,13 @@ export const metadata: Metadata = {
 
 const ROUTES = [
   {
+    label: "Software & ICT",
+    company: "Suez Group",
+    value: "info@suezgas.com",
+    href: "mailto:info@suezgas.com",
+    note: "Digital products, systems and technology enquiries.",
+  },
+  {
     label: "Buying cooking gas",
     company: "Suez Gas Nigeria",
     value: "+234 816 800 3677",
