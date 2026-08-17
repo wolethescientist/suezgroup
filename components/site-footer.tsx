@@ -106,9 +106,9 @@ export function SiteFooter() {
               Advisers
             </h3>
             <ul className="mt-5 space-y-2 text-[0.9375rem] text-fg-slate-muted">
-              <li>Oribera Limited — technical</li>
-              <li>Reimnet Limited — technology</li>
-              <li>Ashfar Limited — advisory</li>
+              <li>Oribera Limited - technical</li>
+              <li>Reimnet Limited - technology</li>
+              <li>Ashfar Limited - advisory</li>
             </ul>
           </div>
         </div>

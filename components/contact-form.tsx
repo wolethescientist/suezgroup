@@ -13,7 +13,7 @@ export function ContactForm() {
     if (!form.reportValidity()) return;
 
     const data = new FormData(form);
-    const subject = `${data.get("topic") || "Group enquiry"} — ${data.get("name") || "Website enquiry"}`;
+    const subject = `${data.get("topic") || "Group enquiry"} - ${data.get("name") || "Website enquiry"}`;
     const body = [
       `Name: ${data.get("name") || ""}`,
       `Organisation: ${data.get("organisation") || ""}`,
@@ -70,7 +70,7 @@ export function ContactForm() {
           {status === "opening" ? "Opening email" : "Send enquiry"}
         </button>
         <p className="text-[0.6875rem] uppercase tracking-[0.075em] text-fg-slate-muted" aria-live="polite">
-          {status === "ready" ? "Draft prepared — complete it in your email app." : "Customer orders are faster on the numbers to the left."}
+          {status === "ready" ? "Draft prepared. Complete it in your email app." : "Customer orders are faster on the numbers to the left."}
         </p>
       </div>
     </form>

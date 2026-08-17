@@ -24,9 +24,9 @@ const TIMELINE = [
     "Registered on 7 November 2012 in Abuja as a petroleum products sales and distribution business, operating from Wuse II.",
   ],
   [
-    "2012 – 2019",
+    "2012 - 2019",
     "The route gets built",
-    "Years of cooking gas deliveries into the same estates, hotels, bars, eateries and bakeries. Not a growth story so much as a logistics one — learning a city street by street.",
+    "Years of cooking gas deliveries into the same estates, hotels, bars, eateries and bakeries. Not a growth story so much as a logistics one, learning a city street by street.",
   ],
   [
     "2020",
@@ -92,7 +92,7 @@ export default function AboutPage() {
             ],
             [
               "Lower the impact",
-              "LPG and prepaid metering both reduce waste — cleaner cooking than solid fuel, and consumption people can actually see and manage.",
+            "LPG and prepaid metering both reduce waste: cleaner cooking than solid fuel, and consumption people can actually see and manage.",
             ],
           ].map(([title, body], i) => (
             <div

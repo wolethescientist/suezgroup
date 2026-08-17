@@ -8,7 +8,7 @@ import { CompanyVisual, RouteSignal } from "@/components/energy-visuals";
 export const metadata: Metadata = {
   title: "Our companies",
   description:
-    "Suez Gas Nigeria, SuezElectric and Suez Trading International — the three operating companies of Suez Group, and how to reach each one.",
+    "Suez Gas Nigeria, SuezElectric and Suez Trading International. Meet the three operating companies of Suez Group and find the right one to reach.",
 };
 
 const COMPANIES = [
@@ -24,7 +24,7 @@ const COMPANIES = [
     ],
     facts: [
       ["Serves", "Homes, estates, hotels, bars, bakeries"],
-      ["Cylinder range", "3 – 50 kg"],
+      ["Cylinder range", "3 - 50 kg"],
       ["Contact", "+234 816 800 3677"],
     ],
     href: "https://suezgas.com",
@@ -39,7 +39,7 @@ const COMPANIES = [
     role: "Prepaid electricity vending & e-payments",
     body: [
       "Incorporated to purchase and distribute power through electronic channels to domestic and industrial users. SuezElectric generates prepaid electricity tokens on demand, aggregated across multiple distribution companies and meter technologies.",
-      "Web and mobile apps with a wallet, a naira-to-unit calculator, retrievable transaction history and printable receipts — plus an agent network earning up to 3% commission from mobile kiosks.",
+      "Web and mobile apps with a wallet, a naira-to-unit calculator, retrievable transaction history and printable receipts, plus an agent network earning up to 3% commission from mobile kiosks.",
     ],
     facts: [
       ["Serves", "Prepaid, postpaid and net-metered accounts"],
@@ -58,7 +58,7 @@ const COMPANIES = [
     role: "LPG importation & bulk haulage",
     body: [
       "The group's upstream arm. Suez Trading imports LPG and distributes it to off-takers by road tanker, and holds the group's real-estate and infrastructure investment interests.",
-      "This position is why the downstream companies can price competitively — the group is not buying its product from a competitor.",
+      "This position is why the downstream companies can price competitively. The group is not buying its product from a competitor.",
     ],
     facts: [
       ["Serves", "Off-takers, plants, industrial sites"],
@@ -77,7 +77,7 @@ export default function CompaniesPage() {
       <PageHero
         eyebrow="Operating companies"
         lines={["Three front doors,", "one group."]}
-        lede="Each company is a separate legal entity trading under its own name. If you are buying, go straight to the one you need — the links are below."
+        lede="Each company is a separate legal entity trading under its own name. If you are buying, go straight to the one you need. The links are below."
         aside={
           <div className="grid gap-10">
             <dl className="space-y-4 border-l border-slate-line pl-6">

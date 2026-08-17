@@ -4,7 +4,6 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Grain } from "@/components/texture";
-import { MarketTicker } from "@/components/market-ticker";
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -16,13 +15,13 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
-    default: "Suez Group — An Abuja energy group",
-    template: "%s — Suez Group",
+    default: "Suez Group - An Abuja energy group",
+    template: "%s - Suez Group",
   },
   description:
-    "Suez Group brings together Suez Gas Nigeria, SuezElectric and Suez Trading International — LPG distribution, prepaid electricity vending, and import and haulage, operating from Wuse II, Abuja.",
+    "Suez Group brings together Suez Gas Nigeria, SuezElectric and Suez Trading International. LPG distribution, prepaid electricity vending, import and haulage from Wuse II, Abuja.",
   openGraph: {
-    title: "Suez Group — An Abuja energy group",
+    title: "Suez Group - An Abuja energy group",
     description:
       "LPG distribution, prepaid electricity vending, and import and haulage, from Abuja.",
     type: "website",
@@ -31,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Suez Group — An Abuja energy group",
+    title: "Suez Group - An Abuja energy group",
     description: "Cooking gas, electricity, import and haulage from Abuja.",
     images: ["/og-image.svg"],
   },
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0b1015",
+  themeColor: "#f5f2ec",
 };
 
 export default function RootLayout({
@@ -57,7 +56,6 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <MarketTicker />
         <Grain />
         <SiteHeader />
         <main id="main">{children}</main>

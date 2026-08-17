@@ -41,7 +41,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         lines={["Go to the right", "door first."]}
-        lede="If you are buying gas or electricity, the operating company will resolve it faster than the group will. Everything else — supply, partnership, investment — comes here."
+        lede="If you are buying gas or electricity, the operating company will resolve it faster than the group will. Everything else, including supply, partnership and investment, comes here."
         aside={<RouteSignal label="Group office" value="partnership / supply / capital" />}
       />
 

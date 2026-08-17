@@ -70,7 +70,7 @@ export function Logo({
 
 export function Wordmark({ tone = "slate" }: { tone?: "slate" | "paper" }) {
   return (
-    <Link href="/" aria-label="Suez Group — home" className="group flex items-center">
+    <Link href="/" aria-label="Suez Group home" className="group flex items-center">
       <Logo tone={tone} markClass="h-8 w-auto sm:h-9" />
     </Link>
   );
