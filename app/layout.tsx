@@ -17,31 +17,31 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
-    default: "Suez Group - An Abuja energy group",
+    default: "Suez Group - Energy, logistics, infrastructure and technology",
     template: "%s - Suez Group",
   },
   description:
-    "Suez Group connects Software, ICT, Gas, Trading and Electric services through one operating network from Abuja, Nigeria.",
+    "Suez Group operates across energy supply, haulage and logistics, construction, facility services, FMCG distribution, prepaid power and software - nationwide from Abuja, Nigeria.",
   openGraph: {
-    title: "Suez Group - An Abuja energy group",
+    title: "Suez Group - Energy, logistics, infrastructure and technology",
     description:
-    "Software, ICT, LPG distribution, prepaid electricity vending, import and haulage, from Abuja.",
+    "Five companies across eight sectors: LPG, petroleum supply, haulage, construction, facilities, FMCG, prepaid power, software and ICT.",
     type: "website",
     locale: "en_NG",
-    images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "Suez Group energy infrastructure" }],
+    images: [{ url: "/photos/team.jpg", width: 1200, height: 1000, alt: "A Suez Gas crew weighing a cylinder at the point of delivery in Abuja" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Suez Group - An Abuja energy group",
-    description: "Software, ICT, cooking gas, electricity, import and haulage from Abuja.",
-    images: ["/og-image.svg"],
+    title: "Suez Group - Energy, logistics, infrastructure and technology",
+    description: "Five companies across eight sectors, nationwide from Abuja.",
+    images: ["/photos/team.jpg"],
   },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f5f2ec",
+  themeColor: "#0d1315",
 };
 
 export default function RootLayout({
@@ -54,7 +54,7 @@ export default function RootLayout({
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:bg-ember focus:px-4 focus:py-2 focus:text-xs focus:uppercase focus:text-slate"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:bg-ember focus:px-4 focus:py-2 focus:text-xs focus:uppercase focus:text-[#14191a]"
         >
           Skip to content
         </a>

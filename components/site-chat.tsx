@@ -37,8 +37,8 @@ function answerQuestion(question: string): { text: string; sources: Source[] } {
   if (input.includes("ict") || input.includes("technology") || input.includes("tech") || input.includes("infrastructure")) {
     return { text: "Suez ICT covers connectivity, systems, technical support and the infrastructure that keeps the group’s digital work running.", sources: [SOURCES.ict] };
   }
-  if (input.includes("trading") || input.includes("haulage") || input.includes("bulk") || input.includes("import")) {
-    return { text: "Suez Trading International is the group’s upstream lane for LPG importation and bulk road-tanker haulage.", sources: [SOURCES.trading] };
+  if (input.includes("trading") || input.includes("haulage") || input.includes("bulk") || input.includes("import") || input.includes("construction") || input.includes("supplies") || input.includes("fmcg") || input.includes("freight")) {
+    return { text: "Suez Trading Internationale runs seven divisions: petroleum supply, oilfield services, haulage and logistics, construction and civil works, general supplies, facility and environmental services, and FMCG distribution — nationwide across 36 states.", sources: [SOURCES.trading] };
   }
   if (input.includes("contact") || input.includes("partner") || input.includes("invest") || input.includes("supplier")) {
     return { text: "For partnerships, supply, investment and general enquiries, the group office is the right starting point.", sources: [SOURCES.contact] };

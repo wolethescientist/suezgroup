@@ -2,11 +2,11 @@ import Link from "next/link";
 import { GroupMark, Logo } from "./logo";
 
 const COMPANIES = [
+  ["Suez Gas Nigeria", "LPG distribution", "https://suezgas.vercel.app/"],
+  ["Suez Trading Internationale", "Supply, haulage & works", "https://suez-trading.vercel.app/"],
+  ["SuezElectric", "Prepaid electricity", "https://suezelectric.vercel.app/"],
   ["Suez Software", "Digital products", "/companies#software"],
   ["Suez ICT", "Systems & infrastructure", "/companies#ict"],
-  ["Suez Gas Nigeria", "LPG distribution", "https://suezgas.vercel.app/"],
-  ["SuezElectric", "Prepaid electricity", "https://suezelectric.vercel.app/"],
-  ["Suez Trading International", "Import & haulage", "/companies#trading"],
 ];
 
 export function SiteFooter() {
@@ -16,7 +16,7 @@ export function SiteFooter() {
         <div>
           <Logo markClass="h-11 w-auto" />
           <p className="mt-7 max-w-sm text-body-l text-fg-slate-muted">
-            An Abuja energy group connecting the products, routes and people behind everyday energy.
+            An Abuja group working across energy supply, logistics, construction, facility services, distribution and technology.
           </p>
           <address className="mt-8 space-y-3 text-sm not-italic text-fg-slate-muted">
             <p>20 Alexandria Crescent, Wuse II, Abuja FCT</p>
@@ -67,7 +67,7 @@ export function SiteFooter() {
 
       <div className="measure flex flex-col gap-3 border-t border-slate-line py-7 text-[0.66rem] uppercase tracking-[0.07em] text-fg-slate-muted sm:flex-row sm:items-center sm:justify-between">
         <span>© {new Date().getFullYear()} Suez Group · Abuja, Nigeria</span>
-        <span>Energy that keeps moving.</span>
+        <span>One group, every link in the chain.</span>
       </div>
     </footer>
   );

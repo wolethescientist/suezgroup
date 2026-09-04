@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 
 const ROUTES = [
   {
-    label: "Software & ICT",
-    company: "Suez Group",
-    value: "info@suezgas.com",
-    href: "mailto:info@suezgas.com",
-    note: "Digital products, systems and technology enquiries.",
+    label: "Supplies, haulage & works",
+    company: "Suez Trading Internationale",
+    value: "+234 908 007 0070",
+    href: "tel:+2349080070070",
+    note: "Petroleum supply, freight, construction, facilities and FMCG.",
   },
   {
     label: "Buying cooking gas",
@@ -34,6 +34,13 @@ const ROUTES = [
     note: "Call or WhatsApp, same number.",
   },
   {
+    label: "Software & ICT",
+    company: "Suez Group",
+    value: "info@suezgas.com",
+    href: "mailto:info@suezgas.com",
+    note: "Digital products, systems and technology enquiries.",
+  },
+  {
     label: "Everything else",
     company: "Suez Group",
     value: "info@suezgas.com",
@@ -48,8 +55,10 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         lines={["Go to the right", "door first."]}
-        lede="If you are buying gas or electricity, the operating company will resolve it faster than the group will. Everything else, including supply, partnership and investment, comes here."
+        lede="If you are buying gas, electricity or supplies, the operating company will resolve it faster than the group will. Everything else — supply, partnership, tenders and investment — comes here."
         aside={<RouteSignal label="Group office" value="partnership / supply / capital" />}
+        photo="/photos/logistics.jpg"
+        photoAlt="Freight moving across a distribution terminal"
       />
 
       <section className="relative overflow-hidden py-20 lg:py-28">

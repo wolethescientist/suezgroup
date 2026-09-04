@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { Web } from "./texture";
 import { Reveal, WipeLines } from "./reveal";
 
@@ -49,15 +50,26 @@ export function PageHero({
   lines,
   lede,
   aside,
+  photo,
+  photoAlt = "",
 }: {
   eyebrow: string;
   lines: string[];
   lede?: string;
   aside?: ReactNode;
+  /** Optional full-bleed photograph behind the hero, scrimmed for legibility. */
+  photo?: string;
+  photoAlt?: string;
 }) {
   return (
     <section className="relative overflow-hidden border-b border-slate-line pb-16 pt-40 sm:pb-24 sm:pt-48">
-      <Web origin={{ x: 90, y: 24 }} nodes={150} opacity={0.85} />
+      {photo ? (
+        <div className="page-hero-photo">
+          <Image src={photo} alt={photoAlt} fill priority sizes="100vw" />
+        </div>
+      ) : (
+        <Web origin={{ x: 90, y: 24 }} nodes={150} opacity={0.85} />
+      )}
       {/* Each Reveal carries `reveal` on its own node, so the stagger resolves via
           .reveal.is-in > * rather than a descendant match — see app/page.tsx. */}
       <div className="measure relative">

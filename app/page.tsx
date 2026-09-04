@@ -1,239 +1,454 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { GroupMark } from "@/components/logo";
 import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
-  title: "Suez Group | Energy that keeps moving",
+  title: "Suez Group | Energy, logistics, infrastructure and technology",
   description:
-    "Suez Group connects cooking gas, prepaid electricity and bulk energy logistics through one dependable operating network in Nigeria.",
+    "Suez Group operates across energy supply, haulage and logistics, construction, facility services, FMCG distribution, prepaid power and software — nationwide from Abuja, Nigeria.",
 };
 
-const COMPANIES = [
+/** Group-level figures. Every number below is carried by one of the operating sites. */
+const FIGURES = [
+  { value: "2012", label: "Operating since", note: "Suez Gas Nigeria incorporated in Abuja" },
+  { value: "Five", label: "Companies", note: "Gas · Trading · Electric · Software · ICT" },
+  { value: "36", label: "States served", note: "Nationwide supply and delivery" },
+  { value: "11", label: "Discos connected", note: "Sokoto to Port Harcourt, prepaid" },
+  { value: "14s", label: "Median token time", note: "Paid to delivered on SuezElectric" },
+];
+
+/**
+ * The group is not an LPG business with side projects — it is a general trading,
+ * energy and services group. These eight sectors are the honest span of it,
+ * drawn from what each operating company actually sells today.
+ */
+const SECTORS = [
+  {
+    n: "01",
+    name: "Energy supply",
+    body: "Bulk and retail supply of LPG, AGO, PMS, DPK and lubricants — from a 3kg cylinder to a full road tanker.",
+    by: "Gas · Trading",
+  },
+  {
+    n: "02",
+    name: "Oil & gas field services",
+    body: "Upstream and midstream support for operators, plants and terminals working across the value chain.",
+    by: "Trading",
+  },
+  {
+    n: "03",
+    name: "Haulage & logistics",
+    body: "Tanker haulage and general freight, contracted by volume, with a typical 24–72 hour delivery window.",
+    by: "Gas · Trading",
+  },
+  {
+    n: "04",
+    name: "Construction & civil works",
+    body: "Roads, bridges and building projects, delivered with the group's own supply and haulage behind them.",
+    by: "Trading",
+  },
+  {
+    n: "05",
+    name: "General supplies",
+    body: "Building materials, merchandise and procurement for corporate, institutional and government buyers.",
+    by: "Trading",
+  },
+  {
+    n: "06",
+    name: "Facility & environmental",
+    body: "Waste management, landscaping and site upkeep for estates, plants and commercial premises.",
+    by: "Trading",
+  },
+  {
+    n: "07",
+    name: "FMCG distribution",
+    body: "Fast-moving consumer goods moved down routes the group already runs every day.",
+    by: "Trading",
+  },
+  {
+    n: "08",
+    name: "Power & technology",
+    body: "Prepaid electricity vending, digital products and the ICT systems that hold the whole network together.",
+    by: "Electric · Software · ICT",
+  },
+];
+
+const COMPANIES: {
+  number: string;
+  tag: string;
+  name: string;
+  body: string;
+  href: string;
+  photo: string;
+  alt: string;
+  meta: string;
+  position?: string;
+  screen?: boolean;
+}[] = [
   {
     number: "01",
-    symbol: "⌘",
-    tag: "Software",
-    name: "Suez Software",
-    body: "Digital products and software platforms that turn the group’s operating knowledge into useful tools.",
-    href: "/companies#software",
-    className: "atlas-company-software",
-    label: "products / platforms / tools",
+    tag: "LPG distribution",
+    name: "Suez Gas Nigeria",
+    body: "Cylinder refills from 3kg to 50kg, doorstep pick-up and return, bulk supply, tank telemetry and professional installation for the homes, estates, hotels and bakeries that keep Abuja running.",
+    href: "https://suezgas.vercel.app/",
+    photo: "/photos/filling.jpg",
+    alt: "A technician in full protective equipment operating cylinder filling equipment at a Suez Gas plant",
+    meta: "RC 1076785 · since 2012",
   },
   {
     number: "02",
-    symbol: "╱╲",
-    tag: "ICT systems",
-    name: "Suez ICT",
-    body: "Connectivity, systems and technical infrastructure that keep people, services and information moving.",
-    href: "/companies#ict",
-    className: "atlas-company-ict",
-    label: "systems / support / network",
+    tag: "General trading & services",
+    name: "Suez Trading Internationale",
+    body: "Seven divisions across one value chain — petroleum products, oilfield services, haulage, construction, general supplies, facility services and FMCG distribution — delivered nationwide from Abuja.",
+    href: "https://suez-trading.vercel.app/",
+    photo: "/photos/logistics.jpg",
+    alt: "Container handlers moving freight across a loading terminal",
+    meta: "7 divisions · 36 states",
   },
   {
     number: "03",
-    tag: "LPG distribution",
-    symbol: "◒",
-    name: "Suez Gas Nigeria",
-    body: "Cylinder refills, doorstep delivery and commercial LPG for the homes and businesses that keep Abuja moving.",
-    href: "https://suezgas.vercel.app/",
-    className: "atlas-company-gas",
-    label: "cylinder / home / route",
+    tag: "Prepaid electricity",
+    name: "SuezElectric",
+    body: "Prepaid tokens generated on demand across eleven distribution companies, with a wallet, an agent network and a receipt that survives an argument with a landlord.",
+    href: "https://suezelectric.vercel.app/",
+    photo: "/platforms/suezelectric.jpg",
+    /* Crop to the live token panel rather than the headline — the product, not the page. */
+    position: "76% 46%",
+    screen: true,
+    alt: "The SuezElectric platform showing a prepaid electricity token delivered in fourteen seconds",
+    meta: "RC 1638998 · since 2020",
   },
   {
     number: "04",
-    symbol: "⌁",
-    tag: "Upstream logistics",
-    name: "Suez Trading International",
-    body: "Bulk LPG importation and road-tanker haulage for off-takers, plants and industrial customers.",
-    href: "/companies#trading",
-    className: "atlas-company-trading",
-    label: "import / tanker / volume",
+    tag: "Digital products",
+    name: "Suez Software",
+    body: "The group's product layer. It builds the storefronts, vending platforms and internal tools that turn fourteen years of operating knowledge into software the rest of the network runs on.",
+    href: "/companies#software",
+    photo: "/platforms/suez-trading.jpg",
+    position: "50% 30%",
+    screen: true,
+    alt: "The Suez Trading commerce platform, one of the products built in-house by Suez Software",
+    meta: "Platforms · storefronts · tools",
   },
   {
     number: "05",
-    symbol: "ϟ",
-    tag: "Electric",
-    name: "SuezElectric",
-    body: "Prepaid electricity tokens, wallets and agent kiosks that make power payments easier to reach.",
-    href: "https://suezelectric.vercel.app/",
-    className: "atlas-company-power",
-    label: "token / wallet / kiosk",
+    tag: "Systems & infrastructure",
+    name: "Suez ICT",
+    body: "Connectivity, integrations and technical infrastructure. The lane that keeps depots, agents, tankers and payment rails talking to each other across every state the group works in.",
+    href: "/companies#ict",
+    photo: "/photos/terminal.jpg",
+    alt: "A fuel terminal and storage facility at dusk",
+    meta: "Networks · integrations · support",
   },
+];
+
+const COVERAGE = [
+  "Abuja FCT",
+  "Lagos",
+  "Kano",
+  "Rivers",
+  "Kaduna",
+  "Sokoto",
+  "Enugu",
+  "Oyo",
+  "Delta",
+  "Borno",
+  "Plateau",
+  "+25 more states",
+];
+
+const PARTNERS = [
+  { name: "Nigerian Midstream and Downstream Petroleum Regulatory Authority", file: "nmdpra" },
+  { name: "Nigerian Upstream Petroleum Regulatory Commission", file: "nuprc" },
+  { name: "Rotarex SRG", file: "rotarex" },
+  { name: "NPSC", file: "npsc" },
+  { name: "Ashfar", file: "ashfar" },
+  { name: "Suez Gas Nigeria", file: "suezgas" },
+  { name: "SuezElectric", file: "suezelectric" },
 ];
 
 const ROUTES = [
   ["I need cooking gas", "Suez Gas Nigeria", "https://suezgas.vercel.app/"],
-  ["I need electricity", "SuezElectric", "https://suezelectric.vercel.app/"],
+  ["I need electricity units", "SuezElectric", "https://suezelectric.vercel.app/"],
+  ["I need supplies, haulage or a contractor", "Suez Trading Internationale", "https://suez-trading.vercel.app/"],
   ["I supply, invest or partner", "Suez Group", "/contact"],
 ];
 
 const SOCIALS = [
   { network: "Facebook", handle: "Suez Gas Nigeria", note: "Gas delivery, safety and everyday service", href: "https://www.facebook.com/suezgasnigeria/", mark: "f" },
   { network: "Instagram", handle: "@suezelectric_", note: "Power on demand, from the network", href: "https://www.instagram.com/suezelectric_/", mark: "ig" },
-  { network: "LinkedIn", handle: "SuezElectric Limited", note: "Company updates and partnerships", href: "https://www.linkedin.com/in/suezelectric-limited/", mark: "in" },
+  { network: "LinkedIn", handle: "SuezElectric Limited", note: "Company updates, partnerships and tenders", href: "https://www.linkedin.com/in/suezelectric-limited/", mark: "in" },
 ];
-
-function ContourField() {
-  return (
-    <svg className="atlas-contours" viewBox="0 0 1200 720" fill="none" aria-hidden="true">
-      <path d="M-40 122C134 34 231 63 343 128s179 78 282 9c104-69 196-112 337-88 125 22 180 86 278 73" />
-      <path d="M-54 174c183-93 279-59 393 7 115 66 182 77 285 4 103-73 193-116 332-91 126 23 180 88 290 73" />
-      <path d="M-68 231c182-96 285-56 401 9 113 63 179 75 279 4 102-72 195-119 335-92 127 24 180 91 293 74" />
-      <path d="M-77 295c180-95 286-54 402 11 114 64 176 77 278 4 104-73 198-118 339-90 127 25 181 92 297 74" />
-      <path d="M-84 364c181-93 285-50 399 14 115 65 177 77 280 1 101-74 198-116 339-87 128 26 185 93 303 73" />
-      <path d="M-90 437c181-89 283-46 397 18 112 63 175 75 276 1 102-75 202-116 343-86 128 27 188 93 306 73" />
-      <path d="M-94 515c182-89 282-42 395 19 114 62 177 73 278-3 103-76 203-113 344-83 128 28 189 93 309 72" />
-      <path d="M-100 602c181-84 283-38 394 22 112 61 178 72 280-5 104-78 204-113 345-82 130 28 192 94 313 72" />
-      <path className="atlas-contour-accent" d="M-32 672c178-83 280-37 389 21 115 62 182 71 284-6 101-76 203-110 344-78 130 29 193 93 315 69" />
-    </svg>
-  );
-}
-
-function GroupRouteMap() {
-  return (
-    <div className="atlas-map" aria-label="Suez Group connects gas, power and logistics">
-      <svg viewBox="0 0 620 460" fill="none" aria-hidden="true">
-        <path className="atlas-map-line" d="M310 205C244 142 179 103 94 81" />
-        <path className="atlas-map-line" d="M310 205C378 143 449 102 526 79" />
-        <path className="atlas-map-line" d="M310 227C239 287 168 334 88 371" />
-        <path className="atlas-map-line" d="M310 227C380 287 452 333 532 371" />
-        <circle className="atlas-map-dot" cx="94" cy="81" r="6" />
-        <circle className="atlas-map-dot" cx="526" cy="79" r="6" />
-        <circle className="atlas-map-dot" cx="88" cy="371" r="6" />
-        <circle className="atlas-map-dot" cx="532" cy="371" r="6" />
-        <circle className="atlas-map-ring" cx="310" cy="216" r="92" />
-        <circle className="atlas-map-ring atlas-map-ring-small" cx="310" cy="216" r="61" />
-      </svg>
-
-      <div className="atlas-map-core">
-        <GroupMark className="h-14 w-auto text-white" />
-        <span>Suez Group</span>
-        <small>one operating network</small>
-      </div>
-
-      <div className="atlas-map-label atlas-map-label-gas">
-        <span>01 / gas</span>
-        <strong>Cooking gas</strong>
-        <small>cylinder / home / route</small>
-      </div>
-      <div className="atlas-map-label atlas-map-label-power">
-        <span>02 / power</span>
-        <strong>Electricity</strong>
-        <small>token / wallet / kiosk</small>
-      </div>
-      <div className="atlas-map-label atlas-map-label-trading">
-        <span>03 / upstream</span>
-        <strong>Bulk haulage</strong>
-        <small>import / tanker / volume</small>
-      </div>
-    </div>
-  );
-}
 
 export default function HomePage() {
   return (
     <div className="atlas-page">
+      {/* ---------------------------------------------------------------- 01 */}
       <section className="atlas-hero">
-        <ContourField />
-        <div className="measure atlas-hero-inner">
-          <div className="atlas-hero-grid">
-            <Reveal className="atlas-hero-copy" immediate>
-              <div className="eyebrow">Suez Group <span>·</span> Abuja, Nigeria</div>
-              <h1>Energy that <em>keeps moving.</em></h1>
-              <p>
-                We connect the everyday energy people rely on with the network, people and infrastructure that make it dependable.
-              </p>
-              <div className="atlas-actions">
-                <Link href="/companies" className="btn btn-ember">Meet the companies <span aria-hidden="true">↗</span></Link>
-                <Link href="/about" className="atlas-text-link">How the group works <span aria-hidden="true">→</span></Link>
-              </div>
-            </Reveal>
+        <div className="atlas-hero-photo">
+          <Image
+            src="/photos/team.jpg"
+            alt="A Suez Gas crew weighing a cylinder on a certified scale at the point of delivery in Abuja"
+            fill
+            priority
+            sizes="100vw"
+          />
+        </div>
 
-            <Reveal className="atlas-hero-visual" immediate delay={120}>
-              <div className="atlas-visual-index">01 <span>the network</span></div>
-              <GroupRouteMap />
-              <div className="atlas-visual-note">
-                <span>Supply</span><i /><span>Network</span><i /><span>Everyday</span>
-              </div>
-            </Reveal>
-          </div>
+        <div className="measure atlas-hero-inner">
+          <Reveal className="atlas-hero-copy" immediate>
+            <div className="eyebrow">Suez Group <span>·</span> Abuja, Nigeria</div>
+            <h1>One group, <em>every link in the chain.</em></h1>
+            <p>
+              Energy supply, haulage, construction, facility services, FMCG distribution, prepaid
+              power and the software behind all of it. From a cylinder weighed at a doorstep in
+              Abuja to bulk supply delivered across thirty-six states.
+            </p>
+            <div className="atlas-actions">
+              <Link href="/companies" className="btn btn-ember">Meet the companies <span aria-hidden="true">↗</span></Link>
+              <Link href="/about" className="atlas-text-link">How the group works <span aria-hidden="true">→</span></Link>
+            </div>
+            <div className="atlas-hero-sectors">
+              <span>Energy supply</span>
+              <span>Haulage &amp; logistics</span>
+              <span>Construction</span>
+              <span>Facility services</span>
+              <span>FMCG</span>
+              <span>Prepaid power</span>
+              <span>Software &amp; ICT</span>
+            </div>
+          </Reveal>
 
           <div className="atlas-hero-foot">
-            <span>Built in Abuja <i /> serving the moments that matter</span>
+            <span>Built in Abuja <i /> operating since 2012 <i /> serving 36 states</span>
             <span className="atlas-scroll-cue"><i /> Scroll to explore</span>
           </div>
         </div>
       </section>
 
-      <section className="atlas-intro">
-        <div className="measure atlas-intro-grid">
-          <div className="rail-index"><span>02</span><span>Our point of view</span></div>
-          <Reveal>
-            <h2>The product is only as strong as the route behind it.</h2>
-            <p>
-              Suez Group brings together the companies that move energy from source to street. Gas for a home. Power on a meter. Bulk supply for the infrastructure behind both.
-            </p>
-            <Link href="/about" className="atlas-text-link atlas-text-link-dark">Read about the group <span aria-hidden="true">→</span></Link>
-          </Reveal>
-          <div className="atlas-intro-stamp" aria-hidden="true">
-            <span>route</span>
-            <strong>before<br />product</strong>
-            <i>since 2012</i>
+      {/* ---------------------------------------------------------------- 02 */}
+      <section className="atlas-figures">
+        <div className="measure">
+          <div className="atlas-figures-grid">
+            {FIGURES.map((figure) => (
+              <div key={figure.label} className="atlas-figure">
+                <strong>{figure.value}</strong>
+                <span>{figure.label}</span>
+                <small>{figure.note}</small>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="atlas-companies">
+      {/* ---------------------------------------------------------------- 03 */}
+      <section className="atlas-intro">
+        <div className="measure atlas-intro-grid">
+          <div className="rail-index"><span>01</span><span>Our point of view</span></div>
+          <Reveal>
+            <h2>A group is only as good as the link you never see.</h2>
+            <p>
+              Most of what Suez Group does happens before anyone notices it. The tanker that
+              arrives at 4am. The materials on site the morning work starts. The token that lands
+              while the kettle is still cold. The route that made all three affordable.
+            </p>
+            <p>
+              We started in 2012 with one LPG distributor learning Abuja street by street. The
+              companies that followed were built on the same asset: a physical network we own,
+              staff and answer for — and now a digital one that reaches every state.
+            </p>
+            <Link href="/about" className="atlas-text-link atlas-text-link-dark">Read about the group <span aria-hidden="true">→</span></Link>
+          </Reveal>
+          <Reveal className="atlas-intro-photo photo photo-frame photo-scrim photo-zoom" delay={120}>
+            <Image
+              src="/photos/haulage.jpg"
+              alt="A road tanker in the group's haulage fleet"
+              fill
+              sizes="(max-width: 64rem) 90vw, 28rem"
+            />
+            <div className="photo-caption"><span>Haulage &amp; logistics</span><span>By volume, by contract</span></div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------- 04 */}
+      <section className="atlas-sectors">
         <div className="measure">
           <div className="atlas-section-head">
-            <div className="rail-index"><span>03</span><span>Operating companies</span></div>
+            <div className="rail-index"><span>02</span><span>What the group does</span></div>
             <Reveal>
-              <h2>Five front doors.<br /><em>One standard.</em></h2>
-              <p>Go straight to the part of the network you need.</p>
+              <h2>Eight sectors, <em>one operating spine.</em></h2>
+              <p>
+                Suez Group is a general trading, energy and services group. The same depots,
+                vehicles, people and systems carry all eight of these — which is why the group can
+                quote a bulk fuel contract and a facility contract in the same week.
+              </p>
             </Reveal>
           </div>
 
-          <div className="atlas-company-grid">
-            {COMPANIES.map((company, index) => (
-              <Reveal key={company.name} as="a" href={company.href} className={`atlas-company-card ${company.className}`} delay={index * 90}>
-                <div className="atlas-card-art" aria-hidden="true">
-                  <div className="atlas-card-orbit" />
-                  <span className="atlas-card-symbol">{company.symbol}</span>
-                </div>
-                <div className="atlas-card-top"><span>{company.number}</span><span>{company.tag}</span></div>
-                <div className="atlas-card-bottom">
-                  <h3>{company.name}</h3>
-                  <p>{company.body}</p>
-                  <span className="atlas-card-foot">{company.label} <b aria-hidden="true">↗</b></span>
-                </div>
+          <div className="atlas-sector-grid">
+            {SECTORS.map((sector, i) => (
+              <Reveal key={sector.name} className="atlas-sector" delay={i * 55}>
+                <span>{sector.n}</span>
+                <strong>{sector.name}</strong>
+                <small>{sector.body}</small>
+                <em>{sector.by}</em>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="atlas-proof">
-        <div className="measure atlas-proof-grid">
-          <Reveal className="atlas-proof-copy">
-            <div className="eyebrow">The Suez difference</div>
-            <h2>Make the invisible part of energy visible.</h2>
+      {/* ---------------------------------------------------------------- 05 */}
+      <section className="atlas-companies">
+        <div className="measure">
+          <div className="atlas-section-head">
+            <div className="rail-index"><span>03</span><span>Operating companies</span></div>
+            <Reveal>
+              <h2>Five front doors.<br /><em>One standard.</em></h2>
+              <p>Each company runs its own business and answers for its own promises. Go straight to the one you need.</p>
+            </Reveal>
+          </div>
+
+          <div className="atlas-company-grid">
+            {COMPANIES.map((company, index) => {
+              const external = company.href.startsWith("http");
+              return (
+                <Reveal
+                  key={company.name}
+                  as="a"
+                  href={company.href}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="atlas-company-card"
+                  delay={index * 80}
+                >
+                  <div className={`atlas-company-photo${company.screen ? " is-screen" : ""}`}>
+                    <Image
+                      src={company.photo}
+                      alt={company.alt}
+                      fill
+                      sizes="(max-width: 64rem) 100vw, 50vw"
+                      style={company.position ? { objectPosition: company.position } : undefined}
+                    />
+                  </div>
+                  <div className="atlas-card-top"><span>{company.number}</span><span>{company.tag}</span></div>
+                  <div className="atlas-card-bottom">
+                    <h3>{company.name}</h3>
+                    <p>{company.body}</p>
+                    <span className="atlas-card-foot">{company.meta} <b aria-hidden="true">↗</b></span>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------- 06 */}
+      <section className="atlas-product">
+        <div className="measure atlas-product-grid">
+          <Reveal>
+            <div className="eyebrow">In the field <span>·</span> Own-brand product</div>
+            <h2>The SRG smart regulator.</h2>
             <p>
-              We believe trust starts with a number people can see: the weight on a scale, the value on a token, the route behind a delivery.
+              Built with Rotarex SRG and sold through Suez Trading, it puts a pressure gauge and
+              leak check on the outside of the cylinder — so a household can see what it has left
+              and whether the seal is sound, without calling anybody.
             </p>
+            <dl className="atlas-product-list">
+              <div><dt>Built in</dt><dd>Leak detection and pressure monitoring on the regulator body</dd></div>
+              <div><dt>Fits</dt><dd>Standard 3kg to 50kg domestic and commercial cylinders</dd></div>
+              <div><dt>Sold through</dt><dd>Suez Trading online store, with nationwide delivery</dd></div>
+              <div><dt>Price</dt><dd>₦10,000 — order online or by bulk quote</dd></div>
+            </dl>
+            <a href="https://suez-trading.vercel.app/" target="_blank" rel="noopener noreferrer" className="btn btn-ember mt-9">Shop the SRG regulator <span aria-hidden="true">↗</span></a>
           </Reveal>
-          <Reveal className="atlas-proof-board" delay={120}>
-            <div className="atlas-proof-board-label"><span>Operating principle</span><span>03 / 03</span></div>
-            <div className="atlas-proof-board-word">SHOW<br /><em>THE NUMBER.</em></div>
-            <div className="atlas-proof-board-meta"><span>Measured at the door</span><span>Delivered to the meter</span><span>Tracked on the road</span></div>
+
+          <Reveal className="atlas-product-photos" delay={120}>
+            <div className="photo photo-frame photo-zoom">
+              <Image src="/photos/srg-regulator.jpg" alt="The Suez SRG smart gas regulator with its built-in pressure and leak-check gauge" fill sizes="(max-width: 64rem) 90vw, 40vw" />
+            </div>
+            <div className="photo photo-frame photo-zoom">
+              <Image src="/photos/srg-product.jpg" alt="The Suez SRG smart gas regulator, side view" fill sizes="(max-width: 64rem) 45vw, 20vw" />
+            </div>
+            <div className="atlas-product-spec">
+              <span>Safety</span>
+              <strong>Leak<br />check</strong>
+              <small>On the gauge, not in a manual</small>
+            </div>
           </Reveal>
         </div>
       </section>
 
+      {/* ---------------------------------------------------------------- 07 */}
+      <section className="atlas-coverage">
+        <div className="measure atlas-coverage-grid">
+          <Reveal>
+            <div className="rail-index"><span>04</span><span>Reach</span></div>
+            <h2>Abuja-based. <em>Nationwide.</em></h2>
+            <p>
+              Physical supply and haulage run from Abuja to thirty-six states on a typical 24–72
+              hour window. Prepaid power reaches further still — eleven distribution companies,
+              Sokoto to Port Harcourt, wherever there is a meter and a phone.
+            </p>
+            <div className="atlas-coverage-list">
+              {COVERAGE.map((place) => <span key={place}>{place}</span>)}
+            </div>
+          </Reveal>
+          <Reveal className="atlas-coverage-photo photo photo-frame photo-scrim photo-zoom" delay={120}>
+            <Image src="/photos/logistics.jpg" alt="Freight moving across a distribution terminal" fill sizes="(max-width: 64rem) 90vw, 45vw" />
+            <div className="photo-caption"><span>24–72 hour window</span><span>36 states</span></div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------- 08 */}
+      <section className="atlas-partners">
+        <div className="measure">
+          <div className="atlas-partners-head">
+            <div className="eyebrow">Regulators, partners and brands</div>
+            <p>The group operates under Nigerian petroleum regulation and builds with manufacturers whose equipment carries our name.</p>
+          </div>
+          <div className="atlas-partner-row">
+            {PARTNERS.map((partner) => (
+              <div key={partner.file} className="atlas-partner">
+                <Image src={`/partners/${partner.file}.jpg`} alt={partner.name} width={340} height={110} sizes="9rem" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------- 09 */}
+      <section className="atlas-proof">
+        <div className="measure atlas-proof-grid">
+          <Reveal className="atlas-proof-copy">
+            <div className="eyebrow">The Suez difference</div>
+            <h2>Make the invisible part visible.</h2>
+            <p>
+              Short-measured cylinders and unexplained bills are the two complaints that define
+              this industry. Both are solved the same way — by showing the customer the number
+              instead of asserting it.
+            </p>
+          </Reveal>
+          <Reveal className="atlas-proof-board" delay={120}>
+            <div className="photo">
+              <Image src="/photos/terminal.jpg" alt="A petroleum storage terminal at dusk" fill sizes="(max-width: 64rem) 90vw, 55vw" />
+            </div>
+            <div className="atlas-proof-board-label"><span>Operating principle</span><span>01 / 01</span></div>
+            <div className="atlas-proof-board-word">SHOW<br /><em>THE NUMBER.</em></div>
+            <div className="atlas-proof-board-meta"><span>Weighed at the door</span><span>Delivered to the meter</span><span>Tracked on the road</span></div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------- 10 */}
       <section className="atlas-social">
         <div className="measure atlas-social-grid">
           <Reveal>
-            <div className="rail-index"><span>04</span><span>Social / in the field</span></div>
+            <div className="rail-index"><span>05</span><span>Social / in the field</span></div>
             <h2>Signal from the <em>network.</em></h2>
             <p>Follow the people, products and conversations moving through the Suez network.</p>
           </Reveal>
@@ -251,29 +466,35 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ---------------------------------------------------------------- 11 */}
       <section className="atlas-paths">
         <div className="measure atlas-paths-grid">
           <Reveal>
-            <div className="rail-index"><span>05</span><span>Find your front door</span></div>
+            <div className="rail-index"><span>06</span><span>Find your front door</span></div>
             <h2>Start with what brings you <em>here.</em></h2>
-            <p>Customers, suppliers, partners and investors all have a direct route into the group.</p>
+            <p>Customers, contractors, suppliers, partners and investors all have a direct route into the group.</p>
           </Reveal>
           <Reveal className="atlas-route-list" delay={110}>
             {ROUTES.map(([label, company, href], index) => {
               const external = href.startsWith("http");
               const content = <><span className="atlas-route-number">0{index + 1}</span><span><strong>{label}</strong><small>{company}</small></span><b aria-hidden="true">↗</b></>;
-              return external ? <a key={label} href={href} target="_blank" rel="noopener noreferrer">{content}</a> : <Link key={label} href={href}>{content}</Link>;
+              return external
+                ? <a key={label} href={href} target="_blank" rel="noopener noreferrer">{content}</a>
+                : <Link key={label} href={href}>{content}</Link>;
             })}
           </Reveal>
         </div>
       </section>
 
+      {/* ---------------------------------------------------------------- 12 */}
       <section className="atlas-cta">
-        <ContourField />
+        <div className="photo">
+          <Image src="/photos/haulage.jpg" alt="" fill sizes="100vw" />
+        </div>
         <div className="measure atlas-cta-inner">
-          <GroupMark className="atlas-cta-mark h-20 w-auto text-white" />
+          <GroupMark className="atlas-cta-mark h-20 w-auto" />
           <Reveal>
-            <div className="eyebrow">For suppliers, partners and investors</div>
+            <div className="eyebrow">For customers, contractors, suppliers and investors</div>
             <h2>Let&apos;s move the right conversation forward.</h2>
           </Reveal>
           <Link href="/contact" className="btn atlas-btn-light">Contact the group <span aria-hidden="true">↗</span></Link>
