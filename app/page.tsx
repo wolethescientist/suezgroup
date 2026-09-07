@@ -200,15 +200,15 @@ export default function HomePage() {
         <div className="measure atlas-hero-inner">
           <Reveal className="atlas-hero-copy" immediate>
             <div className="eyebrow">Suez Group <span>·</span> Abuja, Nigeria</div>
-            <h1>One group, <em>every link in the chain.</em></h1>
+            <h1>An energy, logistics and technology group.</h1>
             <p>
-              Energy supply, haulage, construction, facility services, FMCG distribution, prepaid
-              power and the software behind all of it. From a cylinder weighed at a doorstep in
-              Abuja to bulk supply delivered across thirty-six states.
+              Five companies working out of Abuja: LPG and fuel supply, haulage, construction,
+              facility services, FMCG distribution, prepaid electricity and software. We have been
+              trading since 2012 and deliver to all 36 states.
             </p>
             <div className="atlas-actions">
-              <Link href="/companies" className="btn btn-ember">Meet the companies <span aria-hidden="true">↗</span></Link>
-              <Link href="/about" className="atlas-text-link">How the group works <span aria-hidden="true">→</span></Link>
+              <Link href="/companies" className="btn btn-ember">Our companies <span aria-hidden="true">↗</span></Link>
+              <Link href="/about" className="atlas-text-link">About the group <span aria-hidden="true">→</span></Link>
             </div>
             <div className="atlas-hero-sectors">
               <span>Energy supply</span>
@@ -222,8 +222,8 @@ export default function HomePage() {
           </Reveal>
 
           <div className="atlas-hero-foot">
-            <span>Built in Abuja <i /> operating since 2012 <i /> serving 36 states</span>
-            <span className="atlas-scroll-cue"><i /> Scroll to explore</span>
+            <span>Abuja, Nigeria <i /> since 2012 <i /> 36 states</span>
+            <span className="atlas-scroll-cue"><i /> Scroll</span>
           </div>
         </div>
       </section>
