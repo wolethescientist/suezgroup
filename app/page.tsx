@@ -372,7 +372,7 @@ export default function HomePage() {
               <div><dt>Built in</dt><dd>Leak detection and pressure monitoring on the regulator body</dd></div>
               <div><dt>Fits</dt><dd>Standard 3kg to 50kg domestic and commercial cylinders</dd></div>
               <div><dt>Sold through</dt><dd>Suez Trading online store, with nationwide delivery</dd></div>
-              <div><dt>Price</dt><dd>₦10,000 — order online or by bulk quote</dd></div>
+              <div><dt>Price</dt><dd>₦60,000 — reach out to order or for a bulk quote</dd></div>
             </dl>
             <a href="https://suez-trading.vercel.app/" target="_blank" rel="noopener noreferrer" className="btn btn-ember mt-9">Shop the SRG regulator <span aria-hidden="true">↗</span></a>
           </Reveal>
