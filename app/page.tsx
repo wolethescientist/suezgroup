@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { CodePanel } from "@/components/code-panel";
 import { GroupMark } from "@/components/logo";
 import { Reveal } from "@/components/reveal";
+import { SectorCaption, SectorCycle, SectorFrames, SectorNote } from "@/components/sector-stage";
 
 export const metadata: Metadata = {
   title: "Suez Group | Energy, logistics, infrastructure and technology",
@@ -81,11 +83,14 @@ const COMPANIES: {
   name: string;
   body: string;
   href: string;
-  photo: string;
+  /** Every company but Software is carried by a photograph. */
+  photo?: string;
   alt: string;
   meta: string;
   position?: string;
   screen?: boolean;
+  /** Software's work is the code, so its card renders code instead of a photo. */
+  code?: boolean;
 }[] = [
   {
     number: "01",
@@ -126,10 +131,8 @@ const COMPANIES: {
     name: "Suez Software",
     body: "The group's product layer. It builds the storefronts, vending platforms and internal tools that turn fourteen years of operating knowledge into software the rest of the network runs on.",
     href: "/companies#software",
-    photo: "/platforms/suez-trading.jpg",
-    position: "50% 30%",
-    screen: true,
-    alt: "The Suez Trading commerce platform, one of the products built in-house by Suez Software",
+    code: true,
+    alt: "",
     meta: "Platforms · storefronts · tools",
   },
   {
@@ -138,8 +141,9 @@ const COMPANIES: {
     name: "Suez ICT",
     body: "Connectivity, integrations and technical infrastructure. The lane that keeps depots, agents, tankers and payment rails talking to each other across every state the group works in.",
     href: "/companies#ict",
-    photo: "/photos/terminal.jpg",
-    alt: "A fuel terminal and storage facility at dusk",
+    /* ICT is connectivity, not a tank farm — the network rack, not the terminal. */
+    photo: "/photos/sectors/ict.jpg",
+    alt: "Fibre patch cables terminated in a network rack",
     meta: "Networks · integrations · support",
   },
 ];
@@ -186,16 +190,9 @@ export default function HomePage() {
   return (
     <div className="atlas-page">
       {/* ---------------------------------------------------------------- 01 */}
+      <SectorCycle>
       <section className="atlas-hero">
-        <div className="atlas-hero-photo">
-          <Image
-            src="/photos/team.jpg"
-            alt="A Suez Gas crew weighing a cylinder on a certified scale at the point of delivery in Abuja"
-            fill
-            priority
-            sizes="100vw"
-          />
-        </div>
+        <SectorFrames tone="hero" />
 
         <div className="measure atlas-hero-inner">
           <Reveal className="atlas-hero-copy" immediate>
@@ -210,6 +207,10 @@ export default function HomePage() {
               <Link href="/companies" className="btn btn-ember">Our companies <span aria-hidden="true">↗</span></Link>
               <Link href="/about" className="atlas-text-link">About the group <span aria-hidden="true">→</span></Link>
             </div>
+          </Reveal>
+
+          {/* The five companies, cycling: a photograph and its write-up per company. */}
+          <div className="atlas-hero-stage">
             <div className="atlas-hero-sectors">
               <span>Energy supply</span>
               <span>Haulage &amp; logistics</span>
@@ -219,7 +220,8 @@ export default function HomePage() {
               <span>Prepaid power</span>
               <span>Software &amp; ICT</span>
             </div>
-          </Reveal>
+            <SectorNote />
+          </div>
 
           <div className="atlas-hero-foot">
             <span>Abuja, Nigeria <i /> since 2012 <i /> 36 states</span>
@@ -227,6 +229,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </SectorCycle>
 
       {/* ---------------------------------------------------------------- 02 */}
       <section className="atlas-figures">
@@ -324,14 +327,22 @@ export default function HomePage() {
                   className="atlas-company-card"
                   delay={index * 80}
                 >
-                  <div className={`atlas-company-photo${company.screen ? " is-screen" : ""}`}>
-                    <Image
-                      src={company.photo}
-                      alt={company.alt}
-                      fill
-                      sizes="(max-width: 64rem) 100vw, 50vw"
-                      style={company.position ? { objectPosition: company.position } : undefined}
-                    />
+                  <div
+                    className={`atlas-company-photo${company.screen ? " is-screen" : ""}${
+                      company.code ? " is-code" : ""
+                    }`}
+                  >
+                    {company.code ? (
+                      <CodePanel />
+                    ) : (
+                      <Image
+                        src={company.photo as string}
+                        alt={company.alt}
+                        fill
+                        sizes="(max-width: 64rem) 100vw, 50vw"
+                        style={company.position ? { objectPosition: company.position } : undefined}
+                      />
+                    )}
                   </div>
                   <div className="atlas-card-top"><span>{company.number}</span><span>{company.tag}</span></div>
                   <div className="atlas-card-bottom">
@@ -370,8 +381,10 @@ export default function HomePage() {
             <div className="photo photo-frame photo-zoom">
               <Image src="/photos/srg-regulator.jpg" alt="The Suez SRG smart gas regulator with its built-in pressure and leak-check gauge" fill sizes="(max-width: 64rem) 90vw, 40vw" />
             </div>
+            {/* The second frame is where the regulator ends up, not the same
+                studio shot a second time. */}
             <div className="photo photo-frame photo-zoom">
-              <Image src="/photos/srg-product.jpg" alt="The Suez SRG smart gas regulator, side view" fill sizes="(max-width: 64rem) 45vw, 20vw" />
+              <Image src="/photos/kitchen.jpg" alt="A commercial kitchen burner running on cylinder gas" fill sizes="(max-width: 64rem) 45vw, 20vw" />
             </div>
             <div className="atlas-product-spec">
               <span>Safety</span>
@@ -487,10 +500,9 @@ export default function HomePage() {
       </section>
 
       {/* ---------------------------------------------------------------- 12 */}
+      <SectorCycle interval={9000}>
       <section className="atlas-cta">
-        <div className="photo">
-          <Image src="/photos/haulage.jpg" alt="" fill sizes="100vw" />
-        </div>
+        <SectorFrames tone="band" />
         <div className="measure atlas-cta-inner">
           <GroupMark className="atlas-cta-mark h-20 w-auto" />
           <Reveal>
@@ -498,8 +510,10 @@ export default function HomePage() {
             <h2>Let&apos;s move the right conversation forward.</h2>
           </Reveal>
           <Link href="/contact" className="btn atlas-btn-light">Contact the group <span aria-hidden="true">↗</span></Link>
+          <SectorCaption className="atlas-cta-caption" />
         </div>
       </section>
+      </SectorCycle>
     </div>
   );
 }

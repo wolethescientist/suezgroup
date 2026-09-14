@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { CodePanel } from "@/components/code-panel";
 import { PageHero, RailSection, SectionTitle } from "@/components/page-parts";
 import { Reveal } from "@/components/reveal";
 
@@ -107,8 +108,10 @@ const SERVICES = [
       ["Internal tooling", "Dispatch, stock and reconciliation systems"],
       ["Data", "Reporting the operating companies actually use"],
     ],
-    photo: "/platforms/suez-trading.jpg",
-    alt: "The Suez Trading commerce platform, one of the products built in-house",
+    /* Software's work is the code, not a screenshot of Trading's storefront. */
+    code: true,
+    photo: undefined,
+    alt: "",
     href: undefined,
   },
   {
@@ -131,8 +134,8 @@ const SERVICES = [
       ["Technical support", "Field and back-office support desks"],
       ["Infrastructure", "Hosting, security and continuity"],
     ],
-    photo: "/photos/terminal.jpg",
-    alt: "A petroleum storage terminal at dusk",
+    photo: "/photos/sectors/ict.jpg",
+    alt: "Fibre patch cables terminated in a network rack",
     href: undefined,
   },
 ] as const;
@@ -201,12 +204,16 @@ export default function CompaniesPage() {
 
           <div className="service-detail">
             <div className="service-detail-photo photo photo-frame photo-scrim photo-zoom">
-              <Image
-                src={service.photo}
-                alt={service.alt}
-                fill
-                sizes="(max-width: 64rem) 90vw, 40vw"
-              />
+              {"code" in service && service.code ? (
+                <CodePanel />
+              ) : (
+                <Image
+                  src={service.photo as string}
+                  alt={service.alt}
+                  fill
+                  sizes="(max-width: 64rem) 90vw, 40vw"
+                />
+              )}
               <div className="photo-caption">
                 <span>{service.label} / {service.number}</span>
                 <span>{service.name}</span>

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { Web } from "./texture";
 import { Reveal, WipeLines } from "./reveal";
+import { SectorCaption, SectorCycle, SectorFrames } from "./sector-stage";
 
 /**
  * Section wrapper built on the group's index rail. Every section carries a number,
@@ -52,6 +53,7 @@ export function PageHero({
   aside,
   photo,
   photoAlt = "",
+  cycle = false,
 }: {
   eyebrow: string;
   lines: string[];
@@ -60,10 +62,18 @@ export function PageHero({
   /** Optional full-bleed photograph behind the hero, scrimmed for legibility. */
   photo?: string;
   photoAlt?: string;
+  /**
+   * Runs the five sector frames behind the hero instead of one fixed
+   * photograph — for pages that speak for the whole group rather than one
+   * company. Takes precedence over `photo`.
+   */
+  cycle?: boolean;
 }) {
-  return (
+  const hero = (
     <section className="relative overflow-hidden border-b border-slate-line pb-16 pt-40 sm:pb-24 sm:pt-48">
-      {photo ? (
+      {cycle ? (
+        <SectorFrames tone="page" />
+      ) : photo ? (
         <div className="page-hero-photo">
           <Image src={photo} alt={photoAlt} fill priority sizes="100vw" />
         </div>
@@ -98,9 +108,12 @@ export function PageHero({
             </Reveal>
           )}
         </div>
+        {cycle && <SectorCaption className="page-hero-caption" />}
       </div>
     </section>
   );
+
+  return cycle ? <SectorCycle interval={8200}>{hero}</SectorCycle> : hero;
 }
 
 export function SectionTitle({

@@ -40,26 +40,29 @@ export function Logo({
   className = "",
   markClass = "h-10 w-auto",
   tone = "slate",
+  compact = false,
 }: {
   className?: string;
   markClass?: string;
   tone?: "slate" | "paper";
+  /** Header lockup: smaller type and a tighter gap, for the slim nav rail. */
+  compact?: boolean;
 }) {
   return (
-    <span className={`flex items-center gap-3.5 ${className}`}>
+    <span className={`flex items-center ${compact ? "gap-2.5" : "gap-3.5"} ${className}`}>
       <GroupMark className={`${markClass} text-ember`} />
       <span className="leading-none">
         <span
-          className={`block text-[1.375rem] font-bold uppercase leading-none tracking-[-0.02em] ${
+          className={`block ${compact ? "text-[1.1rem]" : "text-[1.375rem]"} font-bold uppercase leading-none tracking-[-0.02em] ${
             tone === "slate" ? "text-fg-slate" : "text-fg-paper"
           }`}
         >
           Suez
         </span>
         <span
-          className={`mt-1 block text-[0.6875rem] font-medium uppercase leading-none tracking-[0.34em] ${
-            tone === "slate" ? "text-fg-slate-muted" : "text-fg-paper-muted"
-          }`}
+          className={`block font-medium uppercase leading-none ${
+            compact ? "mt-0.5 text-[0.58rem] tracking-[0.3em]" : "mt-1 text-[0.6875rem] tracking-[0.34em]"
+          } ${tone === "slate" ? "text-fg-slate-muted" : "text-fg-paper-muted"}`}
         >
           Group
         </span>
@@ -71,7 +74,8 @@ export function Logo({
 export function Wordmark({ tone = "slate" }: { tone?: "slate" | "paper" }) {
   return (
     <Link href="/" aria-label="Suez Group home" className="group flex items-center">
-      <Logo tone={tone} markClass="h-8 w-auto sm:h-9" />
+      {/* Compact: the header bar is a slim rail, not a masthead. */}
+      <Logo tone={tone} compact markClass="h-7 w-auto sm:h-[1.9rem]" />
     </Link>
   );
 }

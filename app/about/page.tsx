@@ -59,8 +59,7 @@ export default function AboutPage() {
         eyebrow="About the group"
         lines={["Built route first,", "products second."]}
         lede="Most trading groups start with a product and hunt for customers. Suez Group started with a delivery network in Abuja and kept adding things worth sending down it — gas, fuel, materials, freight, civil works and, eventually, electricity itself."
-        photo="/photos/terminal.jpg"
-        photoAlt="A petroleum storage terminal at dusk"
+        cycle
         aside={<RouteSignal label="Operating thesis" value="route before product" />}
       />
 

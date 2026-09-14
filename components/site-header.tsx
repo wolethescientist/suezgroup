@@ -23,10 +23,10 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <div className="site-nav mx-auto flex w-full max-w-[88rem] items-center justify-between rounded-full px-3 py-2 sm:px-4">
+      <div className="site-nav mx-auto flex w-full max-w-[88rem] items-center justify-between rounded-full px-2.5 py-1.5 sm:px-3.5">
         <Wordmark />
 
-        <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-6 lg:flex">
           {NAV.map((item) => {
             const active = pathname === item.href;
             return (
@@ -34,7 +34,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`link-slide text-[0.68rem] font-semibold uppercase tracking-[0.1em] transition-colors duration-200 ${active ? "text-ember-ink" : "text-fg-slate-muted hover:text-fg-slate"}`}
+                className={`link-slide text-[0.63rem] font-semibold uppercase tracking-[0.09em] transition-colors duration-200 ${active ? "text-ember-ink" : "text-fg-slate-muted hover:text-fg-slate"}`}
               >
               {item.href === "/companies" ? <><span className="hidden xl:inline">{item.label}</span><span className="xl:hidden">Services</span></> : item.label}
               </Link>
@@ -42,14 +42,14 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-2.5">
           <Link href="/companies" className="btn btn-ember header-cta hidden sm:inline-flex">Explore the group <span aria-hidden="true">↗</span></Link>
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
-            className="grid h-11 w-11 place-items-center rounded-full border border-slate-line transition-colors duration-200 hover:bg-slate-2 lg:hidden"
+            className="grid h-9 w-9 place-items-center rounded-full border border-slate-line transition-colors duration-200 hover:bg-slate-2 lg:hidden"
           >
             <span className="relative block h-3 w-4">
               <span className={`absolute left-0 h-px w-full bg-fg-slate transition-transform duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />

@@ -136,15 +136,15 @@
   .rail { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); }
 
   /* ---------- Header ---------- */
-  .site-header { position: fixed; inset: 3.75rem 1rem auto; z-index: 50; }
+  .site-header { position: fixed; inset: 3.35rem 1rem auto; z-index: 50; }
   .site-nav {
-    min-height: 4.25rem;
+    min-height: 3.5rem;
     border: 1px solid rgb(237 231 220 / .12);
     background: rgb(13 19 21 / .78);
     box-shadow: 0 18px 50px rgb(0 0 0 / .45);
     backdrop-filter: blur(18px);
   }
-  .site-nav .header-cta { min-height: 2.75rem; padding-inline: 1.15rem; }
+  .site-nav .header-cta { min-height: 2.35rem; padding-inline: 1rem; font-size: .655rem; letter-spacing: .075em; }
 
   /* ---------- Market ribbon ---------- */
   .market-ribbon { position: fixed; inset: 0 0 auto; z-index: 60; display: flex; height: 2.7rem; align-items: center; overflow: hidden; border-bottom: 1px solid #23302f; background: #101718; color: var(--color-fg-slate); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; }
@@ -213,9 +213,16 @@
   }
   .atlas-hero-inner { position: relative; z-index: 2; display: flex; min-height: min(54rem, 100svh); flex-direction: column; justify-content: flex-end; padding-top: 10rem; padding-bottom: 0; }
   .atlas-hero-copy { max-width: 46rem; }
-  .atlas-hero-copy h1 { margin-top: 1.9rem; max-width: 15ch; font-size: clamp(3.1rem, 6.4vw, 6.6rem); }
-  .atlas-hero-copy p { max-width: 36rem; margin-top: 2rem; color: #c3ccca; font-size: clamp(1rem, 1.2vw, 1.16rem); line-height: 1.65; }
+  .atlas-hero-copy h1 { margin-top: 1.6rem; max-width: 15ch; font-size: clamp(2.5rem, 4.9vw, 4.9rem); }
+  .atlas-hero-copy p { max-width: 33rem; margin-top: 1.6rem; color: #c3ccca; font-size: clamp(.92rem, 1vw, 1.02rem); line-height: 1.7; }
   .atlas-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; margin-top: 2.4rem; }
+  /* Wide screens: the write-up moves onto the photograph itself, so it is on
+     screen the moment the page loads rather than under a full-height headline. */
+  @media (min-width: 80rem) {
+    .atlas-hero-stage .sector-note { position: absolute; top: 15.5rem; right: clamp(1.25rem, 5vw, 5.5rem); z-index: 3; width: 24rem; flex: none; }
+  }
+  .atlas-hero-stage { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.75rem 2.5rem; margin-top: clamp(2.25rem, 5vw, 3.25rem); }
+  .atlas-hero-stage .atlas-hero-sectors { flex: 1 1 20rem; margin-top: 0; max-width: 34rem; }
   .atlas-hero-sectors { display: flex; flex-wrap: wrap; gap: .55rem 1.6rem; margin-top: 3rem; color: var(--color-fg-slate-muted); font-size: .62rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }
   .atlas-hero-sectors span { position: relative; padding-left: 1rem; }
   .atlas-hero-sectors span::before { content: ""; position: absolute; top: .5em; left: 0; width: .3rem; height: .3rem; border-radius: 50%; background: var(--color-ember); }
@@ -379,6 +386,7 @@
   .atlas-cta-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 5rem 1fr auto; gap: clamp(2rem, 6vw, 6rem); align-items: center; padding-top: clamp(5rem, 9vw, 8rem); padding-bottom: clamp(5rem, 9vw, 8rem); }
   .atlas-cta-mark { color: var(--color-ember); }
   .atlas-cta-inner h2 { max-width: 14ch; margin-top: 1.5rem; font-size: clamp(2.6rem, 5vw, 5rem); }
+  .atlas-cta-caption { grid-column: 1 / -1; margin-top: clamp(2.5rem, 5vw, 3.5rem); border-top: 1px solid rgb(237 231 220 / .16); padding-top: 1.15rem; }
 
   /* =========================================================================
      SECONDARY PAGES
@@ -421,6 +429,70 @@
   .service-divisions small { color: var(--color-fg-slate-muted); font-size: .74rem; line-height: 1.45; }
   .service-closing { padding: clamp(5rem, 8vw, 7rem) 0; border-top: 1px solid var(--color-slate-line); background: var(--color-slate-2); }
 
+  /* ---------- Sector stage — the five companies, cross-fading ---------- */
+  /* z-index 0 keeps the frames AND their scrim (z 3) inside one stacking context, under the copy. */
+  .sector-frames { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: #0d1315; }
+  .sector-frame { position: absolute; inset: 0; transition: opacity 1500ms var(--ease-out-expo); }
+  .sector-frame img { width: 100%; height: 100%; object-fit: cover; }
+  /* The drift runs only while the frame is on stage, so it restarts on every pass. */
+  .sector-frame.is-active img { animation-name: sector-drift; animation-timing-function: linear; animation-fill-mode: both; }
+  @keyframes sector-drift { from { transform: scale(1.03); } to { transform: scale(1.1); } }
+  .sector-frames::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+
+  .sector-frames-hero .sector-frame img { filter: saturate(.7) contrast(1.07) brightness(.56); }
+  .sector-frames-hero::after {
+    background:
+      linear-gradient(to right, rgb(13 19 21 / .96) 0%, rgb(13 19 21 / .86) 34%, rgb(13 19 21 / .34) 68%, rgb(13 19 21 / .55) 100%),
+      linear-gradient(to top, rgb(13 19 21 / .95) 0%, rgb(13 19 21 / .08) 45%);
+  }
+  .sector-frames-page .sector-frame img { filter: saturate(.7) contrast(1.05) brightness(.6); }
+  .sector-frames-page::after {
+    background:
+      linear-gradient(to right, rgb(13 19 21 / .94) 0%, rgb(13 19 21 / .78) 40%, rgb(13 19 21 / .42) 100%),
+      linear-gradient(to top, rgb(13 19 21 / .92) 0%, rgb(13 19 21 / 0) 60%);
+  }
+  .sector-frames-band .sector-frame img { filter: saturate(.45) contrast(1.05) brightness(.28); }
+  .sector-frames-band::after { background: linear-gradient(to right, rgb(13 19 21 / .8), rgb(13 19 21 / .45)); }
+
+  /* The write-up that belongs to the frame on stage */
+  .sector-note { position: relative; flex: 0 1 26rem; max-width: 26rem; border: 1px solid rgb(237 231 220 / .16); padding: 1.15rem 1.25rem 1.15rem; background: rgb(13 19 21 / .58); backdrop-filter: blur(14px); }
+  .sector-note-progress { position: absolute; inset: -1px auto auto -1px; width: calc(100% + 2px); height: 2px; transform-origin: left; background: var(--color-ember); animation-name: sector-progress; animation-timing-function: linear; animation-fill-mode: both; }
+  @keyframes sector-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .sector-note-head { display: flex; justify-content: space-between; gap: 1rem; color: var(--color-ember-ink); font-size: .6rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+  .sector-note-head span:last-child { color: var(--color-fg-slate-muted); font-family: var(--font-mono); letter-spacing: .04em; }
+  .sector-note strong { display: block; margin-top: .6rem; font-family: var(--font-display); font-size: 1.45rem; font-weight: 400; line-height: 1.08; letter-spacing: -.02em; animation: sector-fade 640ms var(--ease-out-expo) both; }
+  .sector-note p { margin-top: .55rem; color: #b9c2c1; font-size: .83rem; line-height: 1.55; animation: sector-fade 640ms 90ms var(--ease-out-expo) both; }
+  @keyframes sector-fade { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+
+  /* One line and the dots, where the page already carries its own copy */
+  .sector-caption { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.1rem; }
+  .sector-caption-company { color: var(--color-ember-ink); font-size: .6rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+  .sector-caption-note { color: #b9c2c1; font-size: .8rem; animation: sector-fade 640ms var(--ease-out-expo) both; }
+  .sector-caption .sector-dots { margin-top: 0; margin-left: auto; }
+
+  .sector-dots { display: flex; gap: .25rem; margin-top: 1rem; }
+  .sector-dots button { display: grid; width: 1.5rem; height: 1.15rem; place-items: center; border: 0; background: transparent; cursor: pointer; }
+  .sector-dots i { display: block; width: 1.15rem; height: 2px; background: rgb(237 231 220 / .26); transition: background-color 280ms ease, transform 280ms var(--ease-out-expo); }
+  .sector-dots button:hover i { background: rgb(237 231 220 / .6); }
+  .sector-dots button.is-active i { background: var(--color-ember); transform: scaleY(2); }
+
+  .page-hero-caption { position: relative; z-index: 2; margin-top: clamp(3rem, 6vw, 4.5rem); border-top: 1px solid rgb(237 231 220 / .16); padding-top: 1.1rem; }
+
+  /* ---------- Suez Software, drawn as code rather than photographed ---------- */
+  .code-panel { position: relative; display: flex; height: 100%; flex-direction: column; overflow: hidden; background: linear-gradient(155deg, #111c1f 0%, #0b1113 62%); }
+  .code-panel-chrome { display: flex; flex: none; align-items: center; gap: .35rem; height: 1.85rem; padding-inline: .75rem; border-bottom: 1px solid rgb(237 231 220 / .1); background: rgb(13 19 21 / .85); }
+  .code-panel-chrome i { width: .38rem; height: .38rem; border-radius: 50%; background: rgb(237 231 220 / .28); }
+  .code-panel-chrome span { margin-left: .5rem; color: var(--color-fg-slate-muted); font-family: var(--font-mono); font-size: .55rem; letter-spacing: .04em; }
+  .code-panel-body { flex: 1; margin: 0; overflow: hidden; padding: 1.1rem 1.2rem; font-family: var(--font-mono); font-size: clamp(.58rem, .78vw, .76rem); line-height: 1.95; }
+  .code-line { display: grid; grid-template-columns: 2rem minmax(0, 1fr); }
+  .code-line b { color: rgb(237 231 220 / .2); font-weight: 400; }
+  .code-line > span { white-space: pre; }
+  .c-key { color: var(--color-ember); } .c-fn { color: #7fc8a9; } .c-str { color: #d9b08c; }
+  .c-num { color: var(--color-ember-ink); } .c-com { color: #5f7071; } .c-punc { color: #8b9a9b; } .c-plain { color: #cdd5d4; }
+  .atlas-company-photo.is-code .code-panel { position: absolute; inset: 0; opacity: .88; transition: opacity 500ms ease; }
+  .atlas-company-card:hover .atlas-company-photo.is-code .code-panel { opacity: 1; }
+  .service-detail-photo .code-panel { position: absolute; inset: 0; }
+
   /* Shared photo band */
   .photo-band { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--color-slate-line); border-block: 1px solid var(--color-slate-line); }
   .photo-band .photo { aspect-ratio: 4 / 3; }
@@ -445,10 +517,11 @@
 }
 
 @media (max-width: 63.99rem) {
-  .site-header { inset: 3.35rem .65rem auto; }
+  .site-header { inset: 3.1rem .65rem auto; }
   .rail { grid-template-columns: 1fr; gap: 1.5rem; }
   .atlas-intro-grid, .atlas-section-head, .atlas-proof-grid, .atlas-paths-grid, .atlas-social-grid, .atlas-product-grid, .atlas-coverage-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .atlas-hero-inner { padding-top: 9rem; }
+  .sector-note { flex-basis: 100%; max-width: none; }
   .atlas-company-grid { grid-template-columns: 1fr; }
   .atlas-company-card:nth-child(n) { grid-column: 1 / -1; min-height: 26rem; }
   .atlas-platform-grid { grid-template-columns: 1fr; }
@@ -467,12 +540,15 @@
   .market-ribbon-label { padding-inline: .7rem; }
   .market-ribbon-source { display: none; }
   .market-ribbon-item { height: 2.3rem; padding-inline: .9rem; }
-  .site-header { inset: 2.85rem .65rem auto; }
-  .site-nav { min-height: 3.75rem; }
+  .site-header { inset: 2.6rem .65rem auto; }
+  .site-nav { min-height: 3.2rem; }
   .atlas-hero { min-height: auto; }
   .atlas-hero-inner { min-height: auto; padding-top: 8.5rem; }
-  .atlas-hero-copy h1 { font-size: clamp(2.6rem, 12vw, 3.9rem); }
-  .atlas-hero-photo img { object-position: 70% 40%; }
+  .atlas-hero-copy h1 { font-size: clamp(2.1rem, 9.5vw, 3.1rem); }
+  .atlas-hero-photo img, .sector-frames-hero .sector-frame img { object-position: 70% 40%; }
+  .atlas-hero-stage { gap: 1.5rem; }
+  .code-panel-body { padding: .85rem .9rem; font-size: .6rem; line-height: 1.8; }
+  .sector-caption .sector-dots { margin-left: 0; }
   .atlas-figures-grid { grid-template-columns: 1fr 1fr; }
   .atlas-figure:nth-child(odd) { border-left: 0; padding-left: 0; }
   .atlas-figure:nth-child(n+3) { border-top: 1px solid var(--color-slate-line); }
