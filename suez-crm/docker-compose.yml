@@ -1,0 +1,23 @@
+# Local Postgres for SuezCRM. Production runs on Neon instead — lib/db.ts
+# picks the driver from the connection string, so nothing else changes.
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: suez-crm-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: suez
+      POSTGRES_PASSWORD: suez
+      POSTGRES_DB: crm
+    ports:
+      - "5434:5432"
+    volumes:
+      - suez-crm-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U suez -d crm"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  suez-crm-pgdata:
