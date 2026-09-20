@@ -1,8 +1,0 @@
-import { requireCap } from "@/lib/auth";
-import { sql } from "@/lib/db";
-import { money } from "@/lib/format";
-import { saveFinanceBudget } from "@/lib/actions/finance";
-import { ActionForm, Dialog, SubmitBtn } from "@/components/form";
-import { Card, Empty, Field, PageHeader, Row, Table, Td } from "@/components/ui";
-export const metadata={title:"Budgets"};
-export default async function BudgetsPage(){await requireCap("budget.manage");const rows=await sql<{id:number;name:string;fiscal_year:number;category:string;allocated:string;currency:string;notes:string|null}>`select * from crm_finance_budgets order by fiscal_year desc,created_at desc`;return <><PageHeader title="Budgets" subtitle="Plan and track approved allocations in CRM."><Dialog label="New budget" title="Create budget"><ActionForm action={saveFinanceBudget} className="space-y-3"><Field label="Budget name"><input name="name" required className="field"/></Field><Row><Field label="Year"><input name="fiscal_year" type="number" defaultValue={new Date().getFullYear()} className="field"/></Field><Field label="Allocation"><input name="allocated" type="number" min="0" step="0.01" required className="field"/></Field></Row><Field label="Category"><input name="category" defaultValue="operating" className="field"/></Field><Field label="Notes"><textarea name="notes" className="field"/></Field><SubmitBtn className="w-full">Save budget</SubmitBtn></ActionForm></Dialog></PageHeader>{rows.length===0?<Card><Empty title="No budgets yet"/></Card>:<Table head={["Budget","Year","Category","Allocated","Notes"]}>{rows.map(b=><tr key={b.id}><Td className="font-bold">{b.name}</Td><Td>{b.fiscal_year}</Td><Td>{b.category}</Td><Td>{money(Number(b.allocated),b.currency)}</Td><Td>{b.notes||"—"}</Td></tr>)}</Table>}</>}
